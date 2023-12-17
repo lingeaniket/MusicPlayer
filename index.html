@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./index.css" />
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="./index.js"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Borel&family=Cookie&family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&family=Lobster+Two&display=swap"
+            rel="stylesheet"
+        />
+
         <title>Music Player</title>
     </head>
     <body>
@@ -27,7 +31,9 @@
                     <div>Library</div>
                 </div>
             </div>
-            <div class="main-content"></div>
+            <div class="main-content">
+                <div class="main-container" id="main-container"></div>
+            </div>
             <div class="queue"></div>
             <div class="player">
                 <div class="player-container">
@@ -35,8 +41,17 @@
                     <div>
                         <div>
                             <div>Buttons</div>
-                            <div class="songRange">
-                                <input type="range" name="" id="song-range" value="0" />
+                            <audio src="" id="music-player-main">
+                              <!-- <source src="" id="music-player-main" type=""> -->
+                            </audio>
+                            <div class="song-main-range">
+                                <div class="song-range">
+                                    <input type="range" name="" step="0.000001" id="song-range"/>
+                                    <div id="selector">
+                                        <div class="selectorBtn"></div>
+                                    </div>
+                                    <div id="progressBar"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -45,4 +60,6 @@
             </div>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
 </html>
