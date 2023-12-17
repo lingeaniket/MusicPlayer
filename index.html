@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./index.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./index.js"></script>
+        <title>Music Player</title>
+    </head>
+    <body>
+        <div class="main-grid">
+            <div class="left-sidebar">
+                <div class="sidebar">
+                    <div>
+                        <div class="sideIcon">
+                            <div>
+                                <a href="/"> Home </a>
+                            </div>
+                        </div>
+                        <div class="sideIcon">
+                            <div>
+                                <a href="/search">Search</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>Library</div>
+                </div>
+            </div>
+            <div class="main-content"></div>
+            <div class="queue"></div>
+            <div class="player">
+                <div class="player-container">
+                    <div>Current playing song</div>
+                    <div>
+                        <div>
+                            <div>Buttons</div>
+                            <div class="songRange">
+                                <input type="range" name="" id="song-range" value="0" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>Volume</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
