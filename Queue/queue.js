@@ -1,6 +1,9 @@
 const queueSide = document.getElementById("queue-side");
 const queueCurrent = document.getElementById("queue-current-song");
 const queuePlaylist = document.getElementById("queue-playlist");
+const queueStack = document.getElementById("queue-stack");
+
+let queueData = [];
 
 async function handleQueueOpen() {
     queueSide.classList.toggle("queue-open");
@@ -8,6 +11,12 @@ async function handleQueueOpen() {
 
     if (!queueSide.classList.contains("queue-open") && musicPlayerData.currentSong) {
         await loadQueueData();
+    } else {
+        if (musicPlayerData.songQueue.length > 1 && musicPlayerData.songIndex < musicPlayerData.songQueue.length - 1) {
+            queueStack.style.display = "block";
+        } else {
+            queueStack.style.display = "none";
+        }
     }
 }
 
@@ -38,65 +47,75 @@ async function loadQueueData() {
 
     queueCurrent.append(queueMainImg);
     queueCurrent.append(queue03);
+    if (musicPlayerData.songQueue.length > 1 && musicPlayerData.songIndex < musicPlayerData.songQueue.length - 1) {
+        queueStack.style.display = "block";
 
-    for (let i = 0; i < musicPlayerData.songQueue.length; i++) {
-        if (i > musicPlayerData.songIndex && i < musicPlayerData.songIndex + 10) {
-            const val = musicPlayerData.songQueue[i];
+        for (let i = 0; i < musicPlayerData.songQueue.length; i++) {
+            if (i > musicPlayerData.songIndex && i < musicPlayerData.songIndex + 10) {
+                const val = musicPlayerData.songQueue[i];
 
-            const queue06 = document.createElement("div");
-            queue06.classList.add("queue06");
+                const queue06 = document.createElement("div");
+                queue06.classList.add("queue06");
 
-            const queue07 = document.createElement("div");
-            queue07.classList.add("queue07");
+                const queue07 = document.createElement("div");
+                queue07.classList.add("queue07");
 
-            const itag = document.createElement("i");
-            itag.classList.add("fa-brands");
-            itag.classList.add("fa-itunes-note");
-            itag.classList.add("fa-xs");
-            itag.style.color = "#ffffff";
+                const itag = document.createElement("i");
+                itag.classList.add("fa-brands");
+                itag.classList.add("fa-itunes-note");
+                itag.classList.add("fa-xs");
+                itag.style.color = "#ffffff";
 
-            queue07.append(itag);
+                queue07.append(itag);
 
-            const queue08 = document.createElement("div");
-            queue08.classList.add("queue08");
+                const queue08 = document.createElement("div");
+                queue08.classList.add("queue08");
 
-            const qImg = document.createElement("img");
-            const data = await axios.get(`https://saavn.me/songs?id=${val}`);
-            const songData = data.data.data[0];
-            qImg.src = songData.image[2].link;
+                const qImg = document.createElement("img");
+                let songData = {};
+                if (queueData[i]) {
+                    songData = queueData[i];
+                } else {
+                    const data = await axios.get(`https://saavn.me/songs?id=${val}`);
+                    songData = data.data.data[0];
+                    queueData[i] = songData;
+                }
+                qImg.src = songData.image[2].link;
 
-            queue08.append(qImg);
+                queue08.append(qImg);
 
-            const queue09 = document.createElement("div");
-            queue09.classList.add("queue09");
+                const queue09 = document.createElement("div");
+                queue09.classList.add("queue09");
 
-            const inDiv = document.createElement("div");
+                const inDiv = document.createElement("div");
 
-            const inH4 = document.createElement("h4");
-            inH4.innerText = songData.name.replace(/&quot;/g, '"');
+                const inH4 = document.createElement("h4");
+                inH4.innerText = songData.name.replace(/&quot;/g, '"');
 
-            const inp = document.createElement("p");
-            inp.innerText = songData.primaryArtists + ", " + songData.featuredArtists;
+                const inp = document.createElement("p");
+                inp.innerText = songData.primaryArtists + ", " + songData.featuredArtists;
 
-            inDiv.append(inH4);
-            inDiv.append(inp);
-            queue09.append(inDiv);
+                inDiv.append(inH4);
+                inDiv.append(inp);
+                queue09.append(inDiv);
 
-            queue06.append(queue07);
-            queue06.append(queue08);
-            queue06.append(queue09);
-            queue06.onclick = playSelectedFromQueue.bind({ id: val, index: i });
+                queue06.append(queue07);
+                queue06.append(queue08);
+                queue06.append(queue09);
+                queue06.onclick = playSelectedFromQueue.bind({ id: val, index: i });
 
-            queuePlaylist.append(queue06);
+                queuePlaylist.append(queue06);
+            }
         }
+    } else {
+        queueStack.style.display = "none";
     }
-
-    async function playSelectedFromQueue() {
-        musicPlayerData.currentSong = this.id;
-        musicPlayerData.songIndex = this.index;
-        await playMusicPlayer();
-        await loadQueueData();
-    }
+}
+async function playSelectedFromQueue() {
+    musicPlayerData.currentSong = this.id;
+    musicPlayerData.songIndex = this.index;
+    await playMusicPlayer();
+    await loadQueueData();
 }
 
 const newData = {
