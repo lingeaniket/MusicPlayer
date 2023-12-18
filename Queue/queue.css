@@ -1,0 +1,167 @@
+.queue {
+    grid-area: queue;
+    width: 350px;
+    overflow: scroll;
+    border-left: 2px solid brown;
+    position: relative;
+}
+
+.queue::-webkit-scrollbar {
+    display: none;
+}
+
+.queue-open {
+    display: none;
+}
+
+.queue01 {
+    padding: 8px 12px;
+    height: 100%;
+}
+
+.queue02 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 8px 12px;
+}
+
+.queueMainImg {
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+.queueMainImg > img {
+    width: 100%;
+    vertical-align: middle;
+    border-radius: 8px;
+}
+
+.queue03 {
+    margin-bottom: 22px;
+}
+
+.queue03 > h3 {
+    margin: 10px 0;
+}
+.queue03 > p {
+    margin: 0;
+}
+.queue03 > h3,
+.queue03 > p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+}
+
+.queue04 {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.queue04 > h3 {
+    margin: 10px 0;
+}
+
+.queue05 {
+    padding: 4px 6px;
+}
+
+.queue06 {
+    display: flex;
+    margin: 2px 0;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+    padding: 10px 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+.queue06:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.queue07 {
+    width: 30px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.queue08 {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.queue08 > img {
+    width: 100%;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+.queue09 {
+    margin-left: 11px;
+    width: calc(100% - 91px);
+}
+
+.queue09 h4,
+.queue09 p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+}
+
+.queue09 h4 {
+    margin: 5px 0;
+    font-size: 14px;
+}
+.queue09 p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.queue10 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 11px;
+}
+
+.queue11 {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    font-weight: 800;
+}
+
+.queue11:hover {
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 900px) {
+    .queue {
+        width: 350px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(173, 173, 173, 0.9);
+        backdrop-filter: blur(10px);
+        border: none;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+}
