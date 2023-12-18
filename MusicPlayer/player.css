@@ -19,8 +19,12 @@
 
 .player-container > div:nth-of-type(2) {
     width: 40%;
-    padding: 0 10px
-
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+.player-container > div:nth-of-type(2)>div {
+    width: 100%;
 }
 
 .song-range {
@@ -184,6 +188,10 @@
 
   .player-container>div:nth-of-type(2){
     width: calc(100% - 97px);
+  }
+
+  .player {
+    height: 100px;
   }
 
   
