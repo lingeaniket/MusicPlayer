@@ -14,7 +14,8 @@ async function playCategory() {
 
     playPauseBtn.classList.remove("fa-play");
     playPauseBtn.classList.add("fa-pause");
-    
+    queueData = [];
+
     await playMusicPlayer();
     await loadQueueData();
 }
