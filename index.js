@@ -1,45 +1,24 @@
-// import axios from "axios";
-// const axios  = require('axios')
-
 const mainDiv = document.getElementById("mainDiv");
+const slider = document.getElementById("song-range");
+const selector = document.getElementById("selector");
+const playPauseBtn = document.getElementById("playPause");
+const progressBar = document.getElementById("progressBar");
+const songDuration = document.getElementById("song-duration");
+const mainContainer = document.getElementById("main-container");
+const musicPlayer = document.getElementById("music-player-main");
+const songCurrentTime = document.getElementById("song-current-time");
 
 const musicPlayerData = {
     currentSong: 0,
     songIndex: 0,
+    currentSongDetails: {},
     songQueue: [],
 };
 
-let timerData = null;
-
-const slider = document.getElementById("song-range");
-const selector = document.getElementById("selector");
-const progressBar = document.getElementById("progressBar");
-const musicPlayer = document.getElementById("music-player-main");
-// const musicPlayer = document.createElement("audio")
-slider.oninput = function () {
-    if(timerData){
-        clearInterval(timerData);
-    }
-    musicPlayer.currentTime = slider.value;
-    selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
-    progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
-
-    timerData = setInterval(() => {
-        slider.value = musicPlayer.currentTime;
-        selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
-        progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
-        // console.log(slider.value)
-    }, 500);
-
-    // musicPlayer.play();
-    // console.log(musicPlayer.currentTime);
-};
-
 const loadSongs = async () => {
-    const list = await axios.get("https://saavn.me/modules?language=hindi,english,tamil");
+    const list = await axios.get("https://saavn.me/modules?language=hindi,english,tamil,telugu");
     const homeData = list.data.data;
 
-    const mainContainer = document.getElementById("main-container");
     for (let key in homeData) {
         const catMainTitle = document.createElement("div");
         catMainTitle.classList.add("cat-main-title");
@@ -63,26 +42,6 @@ const loadSongs = async () => {
     }
 };
 
-const loadData = () => {
-    loadSongs();
-};
-
-window.onload = () => {
-    loadData();
-};
-
-function convertArtistToString(artists) {
-    let titleString = "";
-    artists.forEach((artist, idx) => {
-        if (idx !== artists.length - 1) {
-            titleString += artist.name + ", ";
-        } else {
-            titleString += artist.name;
-        }
-    });
-    return titleString;
-}
-
 function createListItems(data, cat01) {
     for (let i = 0; i < data.length; i++) {
         const list = data[i];
@@ -105,7 +64,8 @@ function createListItems(data, cat01) {
         listTitle.classList.add("list-title");
 
         const titleh4 = document.createElement("h4");
-        titleh4.innerText = list.type === "album" || list.type === "song" ? list.name : list.title;
+        titleh4.innerText =
+            list.type === "album" || list.type === "song" ? list.name.replace(/&quot;/g, '"') : list.title.replace(/&quot;/g, '"');
 
         const titleP = document.createElement("p");
         titleP.innerText =
@@ -125,44 +85,30 @@ function createListItems(data, cat01) {
     }
 }
 
-async function playCategory() {
-    const playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
-    // console.log(playerData.data.data);
-    const songsData = playerData.data.data;
-    musicPlayerData.currentSong = songsData.songs[0].id;
-    musicPlayerData.songIndex = 0;
-    musicPlayerData.songQueue = songsData.songs.map((song) => song.id);
-    // setTimeout(() => {
-    playMusicPlayer();
-    // }, 200);
-}
+const updateContent = () => {
+    const content = document.getElementById("main-container");
+    content.innerHTML = "";
+    if (window.location.pathname === "/search") {
+        content.innerHTML = "<p>Hello search</p>";
+    } else {
+        loadSongs();
+    }
+};
 
-async function playMusicPlayer() {
-    const songDetailsData = await axios.get(`https://saavn.me/songs?id=${musicPlayerData.currentSong}`);
-    const songDetails = songDetailsData.data.data[0];
-    console.log(musicPlayer);
+const handleHomeRoute = () => {
+    window.history.pushState({}, "", "/");
+    updateContent();
+};
 
-    musicPlayer.src = songDetails.downloadUrl[4].link;
-    musicPlayer.onloadedmetadata = function () {
-        slider.max = musicPlayer.duration;
-        slider.value = musicPlayer.currentTime;
-    };
-    musicPlayer.play();
-    timerData = setInterval(() => {
-        slider.value = musicPlayer.currentTime;
-        selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
-        progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
-        // console.log(slider.value)
-    }, 500);
-}
+const handleSearchRoute = () => {
+    window.history.pushState({}, "", "/search");
+    updateContent();
+};
 
-// if(musicPlayer.play()) {
-//     setInterval(()=>{
-//         slider.value = musicPlayer.currentTime;
-//     }, 500)
-// }
+window.addEventListener("popstate", function () {
+    updateContent();
+});
 
-// slider.onchange = function () {
-//     musicPlayer.play();
-//     musicPlayer.currentTime = slider.value;
-// };
+window.onload = () => {
+    loadSongs();
+};
