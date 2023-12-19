@@ -55,6 +55,7 @@ async function playMusicPlayer() {
         slider.max = musicPlayer.duration;
         slider.value = musicPlayer.currentTime;
     };
+    mainMusicPlayer.classList.remove("not-playing");
     updateCurrentSongDetails();
     musicPlayer.play();
     timerData = setInterval(() => {
