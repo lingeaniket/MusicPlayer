@@ -1,9 +1,18 @@
 let timerData = null;
 
 async function playCategory() {
-    const playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
+    let playerData = null;
+
+    if (this.type === "artist") {
+        playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
+    } else {
+        playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
+    }
     const songsData = playerData.data.data;
-    if (this.type === "song") {
+    if (this.type === "artist") {
+        musicPlayerData.currentSong = songsData.results[0].id;
+        musicPlayerData.songQueue = songsData.results.map((song) => song.id);
+    } else if (this.type === "song") {
         musicPlayerData.currentSong = songsData[0].id;
         musicPlayerData.songQueue = songsData.map((song) => song.id);
     } else {
