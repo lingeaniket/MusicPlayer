@@ -49,6 +49,27 @@ body {
 
 .sideIcon {
     padding: 8px 12px;
+    display: flex;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    align-items: center;
+}
+
+.sideIcon:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.sideIcon>div {
+    display: flex;
+    align-items: center;
+}
+
+.sideIcon p {
+    margin: 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+    
 }
 
 .sideIcon > div {
