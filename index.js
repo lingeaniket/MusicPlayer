@@ -7,6 +7,7 @@ const songDuration = document.getElementById("song-duration");
 const mainContainer = document.getElementById("main-container");
 const musicPlayer = document.getElementById("music-player-main");
 const songCurrentTime = document.getElementById("song-current-time");
+const mainMusicPlayer = document.getElementById("music-player-div");
 
 const musicPlayerData = {
     currentSong: 0,
@@ -16,6 +17,7 @@ const musicPlayerData = {
 };
 
 const loadSongs = async () => {
+    // mainMusicPlayer.classList.remove("not-playing");
     const list = await axios.get("https://saavn.me/modules?language=hindi,english,tamil,telugu");
     const homeData = list.data.data;
 
@@ -96,8 +98,8 @@ function createListItems(data, cat01, type) {
 const updateContent = () => {
     const content = document.getElementById("main-container");
     content.innerHTML = "";
-    if (window.location.pathname === "/search") {
-        loadSearch()
+    if (window.location.pathname.includes("/search")) {
+        loadSearch();
     } else {
         loadSongs();
     }
@@ -118,6 +120,7 @@ window.addEventListener("popstate", function () {
 });
 
 window.onload = () => {
-    loadSongs();
+    updateContent();
+    // loadSongs();
     // loadSearch();
 };
