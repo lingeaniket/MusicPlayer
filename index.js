@@ -42,7 +42,7 @@ const loadSongs = async () => {
     }
 };
 
-function createListItems(data, cat01) {
+function createListItems(data, cat01, type) {
     for (let i = 0; i < data.length; i++) {
         const list = data[i];
 
@@ -57,7 +57,7 @@ function createListItems(data, cat01) {
         listImage.classList.add("listImage");
 
         const listimg = document.createElement("img");
-        listimg.src = list.image[2].link;
+        listimg.src = Array.isArray(list.image) ? list.image[2].link : list.image;
         listImage.append(listimg);
 
         const listTitle = document.createElement("div");
@@ -65,11 +65,19 @@ function createListItems(data, cat01) {
 
         const titleh4 = document.createElement("h4");
         titleh4.innerText =
-            list.type === "album" || list.type === "song" ? list.name.replace(/&quot;/g, '"') : list.title.replace(/&quot;/g, '"');
+            type === "search" || type === "topTrend"
+                ? list.title.replace(/&quot;/g, '"')
+                : list.type === "album" || list.type === "song"
+                ? list.name.replace(/&quot;/g, '"')
+                : list.title.replace(/&quot;/g, '"');
 
         const titleP = document.createElement("p");
         titleP.innerText =
-            list.type === "album"
+            type === "topTrend"
+                ? list.subtitle
+                : type === "search"
+                ? list.description
+                : list.type === "album"
                 ? convertArtistToString(list.artists)
                 : list.type === "song"
                 ? convertArtistToString(list.primaryArtists)
@@ -89,7 +97,7 @@ const updateContent = () => {
     const content = document.getElementById("main-container");
     content.innerHTML = "";
     if (window.location.pathname === "/search") {
-        content.innerHTML = "<p>Hello search</p>";
+        loadSearch()
     } else {
         loadSongs();
     }
@@ -111,4 +119,5 @@ window.addEventListener("popstate", function () {
 
 window.onload = () => {
     loadSongs();
+    // loadSearch();
 };
