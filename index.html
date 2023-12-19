@@ -20,14 +20,16 @@
             <div class="left-sidebar">
                 <div class="sidebar">
                     <div>
-                        <div class="sideIcon">
+                        <div class="sideIcon" onclick="handleHomeRoute()">
+                            <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
                             <div>
-                                <p onclick="handleHomeRoute()">Home</p>
+                                <p>Home</p>
                             </div>
                         </div>
-                        <div class="sideIcon">
+                        <div class="sideIcon" onclick="handleSearchRoute()">
+                            <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
                             <div>
-                                <p onclick="handleSearchRoute()">Search</p>
+                                <p>Search</p>
                             </div>
                         </div>
                     </div>
@@ -37,118 +39,6 @@
             <div class="main-content">
                 <div class="main-container" id="main-container">
                     <!-- search -->
-
-                    <!-- <div class="search01">
-                        <div class="search02">
-                            <div class="search03">
-                                <button class="search04">
-                                    <i class="fa-solid fa-chevron-left fa-xs" ></i>
-                                </button>
-                                <button class="search04">
-                                    <i class="fa-solid fa-chevron-right fa-2xs"></i>
-                                </button>
-                            </div>
-                            <div class="search05">
-                                <input class="search-input" type="text" oninput="handleInput(event)" />
-                                <div class="search-icon-div">
-                                    <i class="fa-solid fa-magnifying-glass fa-xs" style="color: #ffffff"></i>
-                                </div>
-                            </div>
-                            <div class="search06"></div>
-                        </div>
-                        <div class="search07">
-                            <div class="search08" id="search-results-div">
-                                <div style="display: flex; margin: 0 0 0 -22px; flex-wrap: wrap; width: 100%;">
-                                    cat list 
-                                    
-                                   
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-        
-                                </div>
-                                <div class="search09">
-                                    <div>
-                                        <h2>Top result</h2>
-                                    </div>
-                                    <div class="search10">
-                                        <div class="search11">
-                                            <img
-                                                src="https://c.saavncdn.com/artists/Lata_Mangeshkar_004_20230623105323_500x500.jpg"
-                                                alt="23456"
-                                            />
-                                        </div>
-                                        <div class="search06">
-                                            <div class="search12">
-                                                <h3>Name of result</h3>
-                                                <p>Type</p>
-                                            </div>
-                                        </div>
-                                        <div class="search13">Play</div>
-                                    </div>
-                                </div>
-                                <div class="search09">
-                                    <div class="search14">
-                                        <h2>Songs</h2>
-                                        <div>
-                                            <div class="search15">View all</div>
-                                        </div>
-                                    </div>
-                                    <div class="search16">
-                                        song list
-                                        <div class="search17">
-                                            <div class="search18">
-                                                <img
-                                                    src="https://c.saavncdn.com/artists/Lata_Mangeshkar_004_20230623105323_500x500.jpg"
-                                                    alt="12356"
-                                                />
-                                            </div>
-                                            <div class="search06">
-                                                <div class="search19">
-                                                    <div class="search20">
-                                                        <h3>Title</h3>
-                                                    </div>
-                                                    <div class="search21">
-                                                        <p>artists songs and names</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="search22">
-                                                <i class="fa-regular fa-heart fa-lg" style="color: #ffffff"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="search23" style="width: 100%">
-                                    <div>
-                                        <h2>Album</h2>
-                                    </div>
-                                    <div class="cat-01">
-                                        use crete list function
-                                        <div class="listmain">
-                                            <div>
-                                                <div class="listImage">
-                                                    <img
-                                                        src="https://c.saavncdn.com/artists/Lata_Mangeshkar_004_20230623105323_500x500.jpg"
-                                                        alt=""
-                                                    />
-                                                </div>
-                                                <div class="list-title">
-                                                    <h4>Title</h4>
-                                                    <p>Artits</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="width: 100%">Artist</div>
-                                <div style="width: 100%">Playlist</div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="queue queue-open" id="queue-side">
@@ -172,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="player">
+            <div class="player not-playing" id="music-player-div">
                 <div class="player-container">
                     <div>
                         <div class="player-01" id="player-meta"></div>
