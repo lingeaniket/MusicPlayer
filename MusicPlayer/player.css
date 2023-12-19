@@ -5,6 +5,10 @@
     border-top: 2px solid brown;
 }
 
+.not-playing {
+    display: none;
+}
+
 .player-container {
     display: flex;
     width: 100%;
