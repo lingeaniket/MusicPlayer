@@ -22,7 +22,7 @@ body {
     height: 100%;
     width: 100%;
     /* padding: 8px; */
-    grid-template-areas:  "left-sidebar main-content queue" "player player player" "top-bar top-bar top-bar";
+    grid-template-areas: "left-sidebar main-content queue" "player player player" "top-bar top-bar top-bar";
     gap: 8px;
 }
 
@@ -60,13 +60,14 @@ body {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     align-items: center;
+    margin: 11px 0;
 }
 
 .sideIcon:hover {
     background-color: rgba(0, 0, 0, 0.12);
 }
 
-.sideIcon>div {
+.sideIcon > div {
     display: flex;
     align-items: center;
 }
@@ -75,7 +76,6 @@ body {
     margin: 0 12px;
     font-size: 16px;
     font-weight: 700;
-    
 }
 
 .sideIcon > div {
@@ -161,28 +161,188 @@ a {
     width: 25%;
 }
 
-@media  screen and (max-width: 1260px) {
+.side01 {
+    margin-bottom: 22px;
+}
+
+.side02 {
+    padding: 8px 12px;
+}
+
+.side03 {
+    margin: 10px 0;
+}
+
+.side04 {
+    padding-left: 22px;
+}
+
+.side05 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.side06 {
+    width: 20%;
+    aspect-ratio: 1/1;
+    background: linear-gradient(to top left, rgb(255, 255, 255), rgb(14, 0, 255));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.side07 {
+    margin-left: 22px;
+    font-weight: 600;
+}
+
+.side08 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sideAddbtn {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.details01 {
+    padding: 8px 12px;
+}
+
+.details02 {
+    display: flex;
+    padding-bottom: 44px;
+}
+
+.details03 {
+    margin-left: 44px;
+}
+
+.details04 {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    /* border: 1px solid black; */
+}
+
+.details04 > img {
+    width: 100%;
+}
+
+.details05 {
+    margin-left: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.details06 > div {
+    display: flex;
+}
+
+.details06 > h2 {
+    margin: 10px 0;
+}
+
+.details06 p {
+    font-weight: 600;
+    font-size: 15px;
+    margin: 2px 0;
+}
+
+.details07 {
+    display: flex;
+    margin: 0 0 0 -22px;
+}
+
+.details07 > div {
+    padding-left: 22px;
+}
+
+.details07 > div:first-of-type > button {
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    padding: 10px 33px;
+    background-color: white;
+    border: 2px solid white;
+    transition: all 0.3s ease-in-out;
+    border-radius: 999px;
+    /* border: none; */
+    height: 100%;
+    outline: none;
+}
+
+.details07 > div:first-of-type > button:hover {
+    border-color: black;
+}
+
+.details07 > div:nth-of-type(2) button,
+.details07 > div:nth-of-type(3) button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border: 2px solid rgb(0, 0, 0);
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+    outline: none;
+    align-items: center;
+}
+
+.details07 > div:nth-of-type(2) button:hover,
+.details07 > div:nth-of-type(3) button:hover {
+    border-color: white;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.details07 i {
+    transition: all 0.3s ease-in-out;
+}
+
+.details07 button:hover i {
+    color: white;
+}
+
+.details08 {
+    border-bottom: 2px solid black;
+}
+
+.details09 {
+    padding: 22px;
+}
+
+@media screen and (max-width: 1260px) {
     .left-sidebar {
         width: 200px;
     }
 
-    .listmain{
+    .listmain {
         width: 20%;
     }
-    
+
     .queue-added .listmain {
         width: 33.33%;
     }
 }
-@media  screen and (max-width: 1150px) {
-    
+@media screen and (max-width: 1150px) {
     .queue-added .listmain {
         width: 50%;
     }
 }
 
-@media  screen and (max-width: 900px) {
-
+@media screen and (max-width: 900px) {
     .listmain {
         width: 33.3333%;
     }
@@ -190,7 +350,6 @@ a {
     .queue-added .listmain {
         width: 33.33%;
     }
-    
 }
 
 @media screen and (max-width: 600px) {
@@ -217,15 +376,10 @@ a {
     .queue-added .listmain {
         width: 50%;
     }
-
-    
-    
 }
 
 @media screen and (max-width: 425px) {
-
-    .sideIcon > div:nth-of-type(2){
+    .sideIcon > div:nth-of-type(2) {
         display: none;
     }
-    
 }
