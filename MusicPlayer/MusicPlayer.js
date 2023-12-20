@@ -1,6 +1,8 @@
 let timerData = null;
 
 async function playCategory() {
+    // window.history.pushState({}, "", `/get-details/?type=${this.type}&id=${this.id}`);
+    // updateContent()
     let playerData = null;
 
     if (this.type === "artist") {
