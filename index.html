@@ -19,25 +19,112 @@
         <div class="main-grid">
             <div class="left-sidebar">
                 <div class="sidebar">
-                    <div>
+                    <div class="side01">
                         <div class="sideIcon" onclick="handleHomeRoute()">
-                            <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
+                            <div>
+                                <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
+                            </div>
                             <div>
                                 <p>Home</p>
                             </div>
                         </div>
                         <div class="sideIcon" onclick="handleSearchRoute()">
-                            <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
+                            <div>
+                                <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
+                            </div>
                             <div>
                                 <p>Search</p>
                             </div>
                         </div>
                     </div>
-                    <div>Library</div>
+                    <div class="side01">
+                        <div class="side02">
+                            <div>
+                                <h4 class="side03">Your Library</h4>
+                            </div>
+                            <div class="side04">
+                                <div>
+                                    <div class="side05">
+                                        <div class="side06">
+                                            <i class="fa-solid fa-play" style="color: white"></i>
+                                        </div>
+                                        <div class="side07">Liked songs</div>
+                                    </div>
+                                    <div class="side05">
+                                        <div class="side06">
+                                            <i class="fa-solid fa-clock-rotate-left" style="color: white"></i>
+                                        </div>
+                                        <div class="side07">History</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="side03">Your Playlist</h4>
+                            </div>
+                            <div class="side08">
+                                <button class="sideAddbtn">+</button>
+                            </div>
+                            <div class="side04" id="your-playlists"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="main-content">
                 <div class="main-container" id="main-container">
+                    <!-- <div class="details01">
+                        <div class="details01">
+                            <div class="details02">
+                                <div class="details03">
+                                    <div class="details04">
+                                        <img src="" alt="1254" />
+                                    </div>
+                                </div>
+                                <div class="details05">
+                                    <div class="details06">
+                                        <h2>Name of category</h2>
+                                        <div>
+                                            <p><span> singers </span><span> total songs </span></p>
+                                        </div>
+                                        <div>
+                                            <p>Copyright</p>
+                                        </div>
+                                    </div>
+                                    <div class="details07">
+                                        <div>
+                                            <button>Play</button>
+                                        </div>
+                                        <div>
+                                            <button>
+                                                <i class="fa-regular fa-heart fa-xl"></i>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button>
+                                                <i class="fa-solid fa-ellipsis fa-xl"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="border-bottom: 2px solid black">
+                                    <h4>mores songs from same album</h4>
+                                </div>
+                                <div style="padding: 22px"></div>
+                            </div>
+                            <div style="margin-bottom: 44px">
+                                <div>
+                                    <h3>Top albums of same artist</h3>
+                                </div>
+                                <div>
+                                    <div class="cat-01">
+                                        <div class="lismain"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>related playlist</div>
+                        </div>
+                    </div> -->
                     <!-- search -->
                 </div>
             </div>
@@ -124,7 +211,6 @@
                     <div style="padding: 0px 12px; display: flex; justify-content: space-between">
                         <div class="sideIcon" onclick="handleHomeRoute()">
                             <div>
-
                                 <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
                             </div>
                             <div>
@@ -133,7 +219,6 @@
                         </div>
                         <div class="sideIcon" onclick="handleSearchRoute()">
                             <div>
-
                                 <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
                             </div>
                             <div>
@@ -142,7 +227,6 @@
                         </div>
                         <div class="sideIcon">
                             <div>
-
                                 <svg
                                     data-encore-id="icon"
                                     role="img"
@@ -162,7 +246,6 @@
                         </div>
                         <div class="sideIcon">
                             <div>
-
                                 <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
                             </div>
                             <div>
