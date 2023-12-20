@@ -51,7 +51,7 @@ async function loadQueueData() {
         queueStack.style.display = "block";
 
         for (let i = 0; i < musicPlayerData.songQueue.length; i++) {
-            if (i > musicPlayerData.songIndex && i < musicPlayerData.songIndex + 10) {
+            if (i > musicPlayerData.songIndex && i < musicPlayerData.songIndex + 5) {
                 const val = musicPlayerData.songQueue[i];
 
                 const queue06 = document.createElement("div");
