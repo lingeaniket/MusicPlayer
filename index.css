@@ -22,8 +22,14 @@ body {
     height: 100%;
     width: 100%;
     /* padding: 8px; */
-    grid-template-areas: "left-sidebar main-content queue" "player player player";
+    grid-template-areas:  "left-sidebar main-content queue" "player player player" "top-bar top-bar top-bar";
     gap: 8px;
+}
+
+.top-bar {
+    /* width: 100%; */
+    grid-area: top-bar;
+    display: none;
 }
 
 .left-sidebar {
@@ -75,6 +81,9 @@ body {
 .sideIcon > div {
     height: 40px;
 }
+.sideIcon > div:first-of-type {
+    height: 24px;
+}
 
 a {
     text-decoration: none;
@@ -93,7 +102,7 @@ a {
     display: flex;
     flex-wrap: wrap;
     margin: 0 0 0 -22px;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .listmain {
@@ -185,6 +194,9 @@ a {
 }
 
 @media screen and (max-width: 600px) {
+    .top-bar {
+        display: block;
+    }
     .left-sidebar {
         display: none;
     }
@@ -193,10 +205,27 @@ a {
         width: 50%;
     }
 
+    .sideIcon {
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .sideIcon > div {
+        height: 30px;
+    }
+
     .queue-added .listmain {
         width: 50%;
     }
 
     
+    
+}
+
+@media screen and (max-width: 425px) {
+
+    .sideIcon > div:nth-of-type(2){
+        display: none;
+    }
     
 }
