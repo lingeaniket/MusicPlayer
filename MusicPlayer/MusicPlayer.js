@@ -12,14 +12,14 @@ async function playCategory() {
     }
     const songsData = playerData.data.data;
     if (this.type === "artist") {
-        musicPlayerData.currentSong = songsData.results[0].id;
-        musicPlayerData.songQueue = songsData.results.map((song) => song.id);
+        musicPlayerData.currentSong = songsData.results[0];
+        musicPlayerData.songQueue = songsData.results;
     } else if (this.type === "song") {
-        musicPlayerData.currentSong = songsData[0].id;
-        musicPlayerData.songQueue = songsData.map((song) => song.id);
+        musicPlayerData.currentSong = songsData[0];
+        musicPlayerData.songQueue = songsData;
     } else {
-        musicPlayerData.currentSong = songsData.songs[0].id;
-        musicPlayerData.songQueue = songsData.songs.map((song) => song.id);
+        musicPlayerData.currentSong = songsData.songs[0];
+        musicPlayerData.songQueue = songsData.songs;
     }
     musicPlayerData.songIndex = 0;
 
@@ -48,9 +48,7 @@ slider.oninput = function () {
 };
 
 async function playMusicPlayer() {
-    const songDetailsData = await axios.get(`https://saavn.me/songs?id=${musicPlayerData.currentSong}`);
-
-    musicPlayerData.currentSongDetails = songDetailsData.data.data[0];
+    musicPlayerData.currentSongDetails = musicPlayerData.currentSong;
 
     musicPlayer.src = musicPlayerData.currentSongDetails.downloadUrl[4].link;
     musicPlayer.onloadedmetadata = function () {

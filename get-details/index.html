@@ -12,6 +12,8 @@
             href="https://fonts.googleapis.com/css2?family=Borel&family=Cookie&family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&family=Lobster+Two&display=swap"
             rel="stylesheet"
         />
+        <link rel="icon" href="../Images/fevicon.ico" type="image/x-icon" />
+        <!-- <link rel="icon" type="image/png" href="/Images/fevicon.png"> -->
 
         <title>Music Player</title>
     </head>
@@ -71,6 +73,60 @@
             </div>
             <div class="main-content">
                 <div class="main-container" id="main-container">
+                    <!-- <div class="details01">
+                        <div class="details01">
+                            <div class="details02">
+                                <div class="details03">
+                                    <div class="details04">
+                                        <img src="" alt="1254" />
+                                    </div>
+                                </div>
+                                <div class="details05">
+                                    <div class="details06">
+                                        <h2>Name of category</h2>
+                                        <div>
+                                            <p><span> singers </span><span> total songs </span></p>
+                                        </div>
+                                        <div>
+                                            <p>Copyright</p>
+                                        </div>
+                                    </div>
+                                    <div class="details07">
+                                        <div>
+                                            <button>Play</button>
+                                        </div>
+                                        <div>
+                                            <button>
+                                                <i class="fa-regular fa-heart fa-xl"></i>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button>
+                                                <i class="fa-solid fa-ellipsis fa-xl"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="border-bottom: 2px solid black">
+                                    <h4>mores songs from same album</h4>
+                                </div>
+                                <div style="padding: 22px"></div>
+                            </div>
+                            <div style="margin-bottom: 44px">
+                                <div>
+                                    <h3>Top albums of same artist</h3>
+                                </div>
+                                <div>
+                                    <div class="cat-01">
+                                        <div class="lismain"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>related playlist</div>
+                        </div>
+                    </div> -->
                     <!-- search -->
                 </div>
             </div>
@@ -152,55 +208,6 @@
                     </div>
                 </div>
             </div>
-            <div class="top-bar">
-                <div style="padding: 8px">
-                    <div style="padding: 0px 12px; display: flex; justify-content: space-between">
-                        <div class="sideIcon" onclick="handleHomeRoute()">
-                            <div>
-                                <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
-                            </div>
-                            <div>
-                                <p>Home</p>
-                            </div>
-                        </div>
-                        <div class="sideIcon" onclick="handleSearchRoute()">
-                            <div>
-                                <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
-                            </div>
-                            <div>
-                                <p>Search</p>
-                            </div>
-                        </div>
-                        <div class="sideIcon">
-                            <div>
-                                <svg
-                                    data-encore-id="icon"
-                                    role="img"
-                                    aria-hidden="true"
-                                    viewBox="0 0 24 24"
-                                    class="Svg-sc-ytk21e-0 iYxpxA"
-                                    style="height: 24px; width: 24px; fill: rgb(255, 255, 255)"
-                                >
-                                    <path
-                                        d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p>Playlist</p>
-                            </div>
-                        </div>
-                        <div class="sideIcon">
-                            <div>
-                                <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
-                            </div>
-                            <div>
-                                <p>Account</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -209,4 +216,5 @@
     <script src="/Queue/queue.js"></script>
     <script src="/MusicPlayer/MusicPlayer.js"></script>
     <script src="/SearchFunctions/searchFunctions.js"></script>
+    <script src="/getDetailsgenerator/getDetailsgenerator.js"></script>
 </html>

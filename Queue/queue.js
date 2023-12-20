@@ -47,6 +47,7 @@ async function loadQueueData() {
 
     queueCurrent.append(queueMainImg);
     queueCurrent.append(queue03);
+
     if (musicPlayerData.songQueue.length > 1 && musicPlayerData.songIndex < musicPlayerData.songQueue.length - 1) {
         queueStack.style.display = "block";
 
@@ -72,14 +73,14 @@ async function loadQueueData() {
                 queue08.classList.add("queue08");
 
                 const qImg = document.createElement("img");
-                let songData = {};
-                if (queueData[i]) {
-                    songData = queueData[i];
-                } else {
-                    const data = await axios.get(`https://saavn.me/songs?id=${val}`);
-                    songData = data.data.data[0];
-                    queueData[i] = songData;
-                }
+                // let songData = {};
+                // if (queueData[i]) {
+                const songData = musicPlayerData.songQueue[i];
+                // } else {
+                //     const data = await axios.get(`https://saavn.me/songs?id=${val}`);
+                //     songData = data.data.data[0];
+                //     queueData[i] = songData;
+                // }
                 qImg.src = songData.image[2].link;
 
                 queue08.append(qImg);
@@ -102,7 +103,7 @@ async function loadQueueData() {
                 queue06.append(queue07);
                 queue06.append(queue08);
                 queue06.append(queue09);
-                queue06.onclick = playSelectedFromQueue.bind({ id: val, index: i });
+                queue06.onclick = playSelectedFromQueue.bind({ data: val, index: i });
 
                 queuePlaylist.append(queue06);
             }
@@ -112,7 +113,7 @@ async function loadQueueData() {
     }
 }
 async function playSelectedFromQueue() {
-    musicPlayerData.currentSong = this.id;
+    musicPlayerData.currentSong = this.data;
     musicPlayerData.songIndex = this.index;
     await playMusicPlayer();
     await loadQueueData();
