@@ -1,40 +1,42 @@
 let timerData = null;
 
-async function playCategory() {
-    window.history.pushState({}, "", `/get-details/?type=${this.type}&id=${this.id}`);
-    updateContent()
-    // let playerData = null;
+async function playCategory(event) {
+    event.stopPropagation();
 
-    // if (this.type === "artist") {
-    //     playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
-    // } else {
-    //     playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
-    // }
-    // const songsData = playerData.data.data;
-    // if (this.type === "artist") {
-    //     musicPlayerData.currentSong = songsData.results[0];
-    //     musicPlayerData.songQueue = songsData.results;
-    // } else if (this.type === "song") {
-    //     musicPlayerData.currentSong = songsData[0];
-    //     musicPlayerData.songQueue = songsData;
-    // } else {
-    //     musicPlayerData.currentSong = songsData.songs[0];
-    //     musicPlayerData.songQueue = songsData.songs;
-    // }
-    // musicPlayerData.songIndex = 0;
+    let playerData = null;
+    musicPlayerData.songIndex = 0;
 
-    // playPauseBtn.classList.remove("fa-play");
-    // playPauseBtn.classList.add("fa-pause");
-    // queueData = [];
+    if (this.type === "artist") {
+        playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
+    } else {
+        playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
+    }
+    const songsData = playerData.data.data;
 
-    // await playMusicPlayer();
-    // await loadQueueData();
+    if (this.type === "artist") {
+        musicPlayerData.currentSong = songsData.results[0];
+        musicPlayerData.songQueue = songsData.results;
+    } else if (this.type === "song") {
+        musicPlayerData.currentSong = songsData[0];
+        musicPlayerData.songQueue = songsData;
+    } else {
+        musicPlayerData.currentSong = songsData.songs[0];
+        musicPlayerData.songQueue = songsData.songs;
+    }
+
+    playPauseBtn.classList.remove("fa-play");
+    playPauseBtn.classList.add("fa-pause");
+    queueData = [];
+
+    await playMusicPlayer();
+    await loadQueueData();
 }
 
 slider.oninput = function () {
     if (timerData) {
         clearInterval(timerData);
     }
+
     musicPlayer.currentTime = slider.value;
     selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
     progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
@@ -51,10 +53,12 @@ async function playMusicPlayer() {
     musicPlayerData.currentSongDetails = musicPlayerData.currentSong;
 
     musicPlayer.src = musicPlayerData.currentSongDetails.downloadUrl[4].link;
+
     musicPlayer.onloadedmetadata = function () {
         slider.max = musicPlayer.duration;
         slider.value = musicPlayer.currentTime;
     };
+
     mainMusicPlayer.classList.remove("not-playing");
     updateCurrentSongDetails();
     musicPlayer.play();
@@ -76,20 +80,23 @@ function updateCurrentSongDetails() {
 
     const img01 = document.createElement("img");
     img01.src = musicPlayerData.currentSongDetails.image[2].link;
+
     player02.append(img01);
     player.append(player02);
 
     const player03 = document.createElement("div");
     player03.classList.add("player-03");
     player03.classList.add("list-title");
+
     const h3player = document.createElement("h3");
     h3player.innerText = musicPlayerData.currentSongDetails.name.replace(/&quot;/g, '"');
+
+    player03.append(h3player);
+
     const pPlayer = document.createElement("p");
     pPlayer.innerText = musicPlayerData.currentSongDetails.primaryArtists + ", " + musicPlayerData.currentSongDetails.featuredArtists;
 
-    player03.append(h3player);
     player03.append(pPlayer);
-
     player.append(player03);
 }
 
