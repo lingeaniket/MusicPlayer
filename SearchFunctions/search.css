@@ -189,10 +189,9 @@
     padding: 5px;
 }
 
-.search18 > img {
+.search18 img {
     width: 100%;
     vertical-align: middle;
-    border-radius: 5px;
 }
 
 .search19 {
@@ -223,12 +222,12 @@
 }
 
 .search21 > p {
-  font-size: 12px;
-  width: 100%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin: 0;
+    font-size: 12px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0;
 }
 
 .search22 {
@@ -236,6 +235,7 @@
     aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
+    transition: all 0.3s ease-in-out;
     align-items: center;
 }
 
@@ -244,5 +244,33 @@
 }
 
 .search24 {
-  width: calc(100% - 116px);
+    width: calc(100% - 116px);
+}
+
+.search25 {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.search26 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.search27 {
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.search17:hover .search25 {
+    opacity: 1;
+}
+.search17:hover .search27 .search22 {
+    opacity: 0;
 }
