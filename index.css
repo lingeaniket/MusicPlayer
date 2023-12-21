@@ -150,9 +150,58 @@ a {
     border-radius: 8px;
     overflow: hidden;
     width: 100%;
+    position: relative;
     aspect-ratio: 1/1;
 }
 
+.listBtns {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 8px;
+    background-color: #000000d3;
+    opacity: 0;
+    aspect-ratio: 1/1;
+    transition: all 0.3s ease-in-out;
+}
+
+.listmain > div:hover .listBtns {
+    opacity: 1;
+}
+
+.listhov {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    height: 100%;
+}
+
+.listabs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.listhovflex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listplaybtn {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    background-color: #000000b3;
+    transition: all 0.3s ease-in-out;
+}
+
+.listhovflex:hover > .listplaybtn {
+    height: 50px;
+    width: 50px;
+}
 .listImage img {
     width: 100%;
     vertical-align: middle;
@@ -213,117 +262,11 @@ a {
     font-size: 25px;
 }
 
-.details01 {
-    padding: 8px 12px;
+.fa-solid.fa-heart {
+    color: green;
 }
-
-.details02 {
-    display: flex;
-    padding-bottom: 44px;
-}
-
-.details03 {
-    margin-left: 44px;
-}
-
-.details04 {
-    width: 180px;
-    height: 180px;
-    border-radius: 8px;
-    /* border: 1px solid black; */
-}
-
-.details04 > img {
-    width: 100%;
-    border-radius: 8px;
-    vertical-align: middle;
-}
-
-.details05 {
-    margin-left: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.details06 > div {
-    display: flex;
-}
-
-.details06 > h2 {
-    margin: 10px 0;
-}
-
-.details06 p {
-    font-weight: 600;
-    font-size: 15px;
-    margin: 2px 0;
-}
-
-.details07 {
-    display: flex;
-    margin: 0 0 0 -22px;
-}
-
-.details07 > div {
-    padding-left: 22px;
-}
-
-.details07 > div:first-of-type > button {
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    align-items: center;
-    padding: 10px 33px;
-    background-color: white;
-    border: 2px solid white;
-    transition: all 0.3s ease-in-out;
-    border-radius: 999px;
-    /* border: none; */
-    height: 100%;
-    outline: none;
-}
-
-.details07 > div:first-of-type > button:hover {
-    border-color: black;
-}
-
-.details07 > div:nth-of-type(2) button,
-.details07 > div:nth-of-type(3) button {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    border: 2px solid rgb(0, 0, 0);
-    transition: all 0.3s ease-in-out;
-    background-color: transparent;
-    outline: none;
-    align-items: center;
-}
-
-.details07 > div:nth-of-type(2) button:hover,
-.details07 > div:nth-of-type(3) button:hover {
-    border-color: white;
-    background-color: rgba(0, 0, 0, 0.12);
-}
-
-.details07 i {
-    transition: all 0.3s ease-in-out;
-}
-
-.details07 button:hover i {
+.fa-regular.fa-heart {
     color: white;
-}
-
-.details08 {
-    border-bottom: 2px solid black;
-}
-
-.details09 {
-    padding: 22px;
 }
 
 @media screen and (max-width: 1260px) {
