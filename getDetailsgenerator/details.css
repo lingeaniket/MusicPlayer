@@ -1,0 +1,180 @@
+
+.details01 {
+  padding: 8px 12px;
+}
+
+.details02 {
+  display: flex;
+  padding-bottom: 44px;
+}
+
+.details03 {
+  margin-left: 44px;
+}
+
+.details04 {
+  width: 180px;
+  height: 180px;
+  border-radius: 8px;
+  /* border: 1px solid black; */
+}
+
+.details04 > img {
+  width: 100%;
+  border-radius: 8px;
+  vertical-align: middle;
+}
+
+.details05 {
+  margin-left: 22px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.details06 > div {
+  display: flex;
+}
+
+.details06 > h2 {
+  margin: 10px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.details06 p {
+  font-weight: 600;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 2px 0;
+}
+
+.details07 {
+  display: flex;
+  margin: 0 0 0 -22px;
+}
+
+.details07 > div {
+  padding-left: 22px;
+}
+
+.details07 > div:first-of-type > button {
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+  padding: 10px 33px;
+  background-color: white;
+  border: 2px solid white;
+  transition: all 0.3s ease-in-out;
+  border-radius: 999px;
+  /* border: none; */
+  height: 100%;
+  outline: none;
+}
+
+.details07 > div:first-of-type > button:hover {
+  border-color: black;
+}
+
+.details07 > div:nth-of-type(2) button,
+.details07 > div:nth-of-type(3) button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  border: 2px solid rgb(0, 0, 0);
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+  outline: none;
+  align-items: center;
+}
+
+.details07 > div:nth-of-type(2) button:hover,
+.details07 > div:nth-of-type(3) button:hover {
+  border-color: white;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.details07 i {
+  transition: all 0.3s ease-in-out;
+}
+
+.details07 button:hover i {
+  color: white;
+}
+
+.details08 {
+  border-bottom: 2px solid black;
+}
+
+.details09 {
+  padding: 22px;
+}
+
+
+@media screen and (max-width: 900px) {
+  .details03 {
+    margin: 0;
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+
+  .details04 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .main-container {
+    padding: 0;
+  }
+
+  .details01{
+    padding: 0;
+  }
+
+  .details03 {
+    margin: 15px 0;
+  }
+
+  .details05 {
+    margin: 0;
+    align-items: center;
+    flex: 1;
+  }
+
+  .details06{
+    text-align: center;
+    margin-bottom: 22px;
+    width: 100%;
+  }
+  .details06 > div{
+    /* text-align: center; */
+    justify-content: center;
+  }
+
+  .details07 {
+    margin: 0;
+  }
+
+  .details07 > div:first-of-type {
+    padding: 0;
+  }
+
+  .details02 {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+}
