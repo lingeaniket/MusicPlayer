@@ -19,20 +19,21 @@ async function loadDetails() {
         playerSongs = songs.data.data.results;
         player = playerData.data.data;
     } else if (type === "song") {
-        playerSongs = playerData.data.data[0];
         player = playerData.data.data[0];
+        const albumid = player.album.id;
+        const albumdata = await axios.get(`https://saavn.me/albums?id=${albumid}`);
+
+        playerSongs = albumdata.data.data.songs;
     } else {
-        playerSongs = player.songs;
         player = playerData.data.data;
+        playerSongs = player.songs;
     }
 
-    console.log(player);
 
     const details01 = document.createElement("div");
     details01.className = "details01";
 
     const details01_1 = document.createElement("div");
-    details01_1.className = "details01";
 
     const details02 = document.createElement("div");
     details02.className = "details02";
@@ -121,8 +122,13 @@ async function loadDetails() {
 
     const div07_02 = document.createElement("div");
     const btn07_02 = document.createElement("button");
+
     const btn_i1 = document.createElement("i");
-    btn_i1.className = "fa-regular fa-heart fa-xl";
+    if (likedData[type].some((val) => val === id)) {
+        btn_i1.className = "fa-solid fa-heart fa-lg";
+    } else {
+        btn_i1.className = "fa-regular fa-heart fa-lg";
+    }
 
     btn07_02.append(btn_i1);
     div07_02.append(btn07_02);
@@ -143,11 +149,35 @@ async function loadDetails() {
 
     details01_1.append(details02);
 
-    // const details08 = document.createElement("div");
-    // details08.className = "details08";
+    const div1 = document.createElement("div");
 
-    // const details09 = document.createElement("div");
-    // details09.className = "details09";
+    if (playerSongs.length - 1 > 0) {
+        const details08 = document.createElement("div");
+        details08.className = "details08";
+        if (type === "song") {
+            const h41 = document.createElement("h4");
+
+            h41.innerText = "More songs from album";
+            details08.append(h41);
+        }
+
+        div1.append(details08);
+
+        const details09 = document.createElement("div");
+        details09.className = "details09";
+
+        let newIndex = 0;
+        for (let i = 0; i < playerSongs.length; i++) {
+            if (type === "song" && playerSongs[i].id == id) {
+                newIndex--;
+                continue;
+            }
+            loadSongList(details09, playerSongs[i], "", i + newIndex);
+        }
+        div1.append(details09);
+    }
+
+    details01_1.append(div1);
 
     // details02.append(details05);
 
@@ -157,39 +187,6 @@ async function loadDetails() {
 
     // <div class="details01">
     //     <div class="details01">
-    //         <div class="details02">
-    //             <div class="details03">
-    //                 <div class="details04">
-    //                     <img src="" alt="1254" />
-    //                 </div>
-    //             </div>
-    //             <div class="details05">
-    //                 <div class="details06">
-    //                     <h2>Name of category</h2>
-    //                     <div>
-    //                         <p><span> singers </span><span> total songs </span></p>
-    //                     </div>
-    //                     <div>
-    //                         <p>Copyright</p>
-    //                     </div>
-    //                 </div>
-    //                 <div class="details07">
-    //                     <div>
-    //                         <button>Play</button>
-    //                     </div>
-    //                     <div>
-    //                         <button>
-    //                             <i class="fa-regular fa-heart fa-xl"></i>
-    //                         </button>
-    //                     </div>
-    //                     <div>
-    //                         <button>
-    //                             <i class="fa-solid fa-ellipsis fa-xl"></i>
-    //                         </button>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
     //         <div>
     //             <div class="details08" style="">
     //                 <h4>mores songs from same album</h4>
@@ -207,6 +204,9 @@ async function loadDetails() {
     //             </div>
     //         </div>
     //         <div>related playlist</div>
-    //     </div>
-    // </div>
+}
+
+async function openDetails() {
+    window.history.pushState({}, "", `/get-details/?type=${this.type}&id=${this.id}`);
+    updateContent();
 }
