@@ -29,7 +29,6 @@ async function loadDetails() {
         playerSongs = player.songs;
     }
 
-
     const details01 = document.createElement("div");
     details01.className = "details01";
 
@@ -117,6 +116,9 @@ async function loadDetails() {
     const div07_01 = document.createElement("div");
     const btn07_01 = document.createElement("button");
     btn07_01.innerText = "Play";
+
+    btn07_01.onclick = playCategory.bind({ type, id });
+
     div07_01.append(btn07_01);
     details07.append(div07_01);
 
@@ -124,11 +126,14 @@ async function loadDetails() {
     const btn07_02 = document.createElement("button");
 
     const btn_i1 = document.createElement("i");
+
     if (likedData[type].some((val) => val === id)) {
         btn_i1.className = "fa-solid fa-heart fa-lg";
     } else {
         btn_i1.className = "fa-regular fa-heart fa-lg";
     }
+
+    btn_i1.onclick = handleLike.bind({ type, id });
 
     btn07_02.append(btn_i1);
     div07_02.append(btn07_02);

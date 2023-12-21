@@ -191,23 +191,25 @@ window.onload = () => {
 };
 
 async function handleLike(event) {
+    var buttonElement = event.target.closest("i");
+    console.log(this)
     const { type, id } = this;
 
     event.stopPropagation();
 
-    const classList = event.target.classList;
+    const classList = buttonElement.classList;
 
     if (classList.contains("fa-solid")) {
-        event.target.classList.remove("fa-solid");
-        event.target.classList.add("fa-regular");
+        buttonElement.classList.remove("fa-solid");
+        buttonElement.classList.add("fa-regular");
 
         const index = likedData[type].indexOf(id);
         likedData[type].splice(index, 1);
 
         localStorage.setItem("liked-data", JSON.stringify(likedData));
     } else {
-        event.target.classList.add("fa-solid");
-        event.target.classList.remove("fa-regular");
+        buttonElement.classList.add("fa-solid");
+        buttonElement.classList.remove("fa-regular");
         likedData[type].push(id);
 
         localStorage.setItem("liked-data", JSON.stringify(likedData));
