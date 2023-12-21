@@ -10,18 +10,23 @@ async function loadDetails() {
 
     const playerData = await axios.get(`https://saavn.me/${type}s?id=${id}`);
 
-    const player = playerData.data.data;
+    let player = "";
 
     let playerSongs = "";
 
-    if (this.type === "artist") {
+    if (type === "artist") {
         const songs = await axios.get(`https://saavn.me/artists/${id}/songs?page=1`);
         playerSongs = songs.data.data.results;
-    } else if (this.type === "song") {
-        playerSongs = player;
+        player = playerData.data.data;
+    } else if (type === "song") {
+        playerSongs = playerData.data.data[0];
+        player = playerData.data.data[0];
     } else {
         playerSongs = player.songs;
+        player = playerData.data.data;
     }
+
+    console.log(player);
 
     const details01 = document.createElement("div");
     details01.className = "details01";
@@ -59,12 +64,32 @@ async function loadDetails() {
     const div06_01 = document.createElement("div");
 
     const p06_01 = document.createElement("p");
-    p06_01.innerText =
-        type === "song"
-            ? `${player.primaryArtists}, ${player.featuredArtists} : ${player.playCount} plays`
-            : type === "album"
-            ? `${player.primaryArtists} ${convertArtistToString(player.featuredArtists)}`
-            : `Followers: ${player.followerCount}, Fans : ${player.fanCount}`;
+
+    const dot_01 = document.createElement("i");
+    dot_01.className = "fa-solid fa-circle fa-2xs";
+    dot_01.style.margin = "0 6px";
+    dot_01.style.fontSize = "5px";
+    dot_01.style.verticalAlign = "middle";
+    if (type === "song") {
+        const spn01 = document.createElement("span");
+        spn01.innerText = `${player.primaryArtists}${player.featuredArtists ? ", " + player.featuredArtists : ""}`;
+        p06_01.append(spn01);
+
+        p06_01.append(dot_01);
+        const spn02 = document.createElement("span");
+        spn02.innerText = player.playCount + " plays";
+        p06_01.append(spn02);
+    } else if (type === "album") {
+        p06_01.innerHTML = `${player.primaryArtists} ${convertArtistToString(player.featuredArtists)}`;
+    } else {
+        const spn01 = document.createElement("span");
+        spn01.innerText = `${player.followerCount} followers`;
+        p06_01.append(spn01);
+        p06_01.append(dot_01);
+        const spn02 = document.createElement("span");
+        spn02.innerText = `${player.fanCount} fans`;
+        p06_01.append(spn02);
+    }
 
     div06_01.append(p06_01);
     details06.append(div06_01);
@@ -74,7 +99,7 @@ async function loadDetails() {
     const p06_02 = document.createElement("p");
     p06_02.innerText =
         type === "song"
-            ? `${player.copyright}, ${player.label}`
+            ? `${player.copyright}`
             : type === "album"
             ? `${player.songCount} Song${player.songCount > 1 ? "s" : ""}`
             : type === "artist"
@@ -85,8 +110,38 @@ async function loadDetails() {
     details06.append(div06_02);
     details05.append(details06);
 
-    // const details07 = document.createElement("div");
-    // details07.className = "details07";
+    const details07 = document.createElement("div");
+    details07.className = "details07";
+
+    const div07_01 = document.createElement("div");
+    const btn07_01 = document.createElement("button");
+    btn07_01.innerText = "Play";
+    div07_01.append(btn07_01);
+    details07.append(div07_01);
+
+    const div07_02 = document.createElement("div");
+    const btn07_02 = document.createElement("button");
+    const btn_i1 = document.createElement("i");
+    btn_i1.className = "fa-regular fa-heart fa-xl";
+
+    btn07_02.append(btn_i1);
+    div07_02.append(btn07_02);
+    details07.append(div07_02);
+
+    const div07_03 = document.createElement("div");
+    const btn07_03 = document.createElement("button");
+    const btn_i2 = document.createElement("i");
+    btn_i2.className = "fa-solid fa-ellipsis fa-xl";
+
+    btn07_03.append(btn_i2);
+    div07_03.append(btn07_03);
+    details07.append(div07_03);
+
+    details05.append(details07);
+
+    details02.append(details05);
+
+    details01_1.append(details02);
 
     // const details08 = document.createElement("div");
     // details08.className = "details08";
@@ -94,9 +149,9 @@ async function loadDetails() {
     // const details09 = document.createElement("div");
     // details09.className = "details09";
 
-    details02.append(details05);
+    // details02.append(details05);
 
-    details01_1.append(details02);
+    // details01_1.append(details02);
     details01.append(details01_1);
     mainContainer.append(details01);
 

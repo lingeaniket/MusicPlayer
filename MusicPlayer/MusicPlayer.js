@@ -1,34 +1,34 @@
 let timerData = null;
 
 async function playCategory() {
-    // window.history.pushState({}, "", `/get-details/?type=${this.type}&id=${this.id}`);
-    // updateContent()
-    let playerData = null;
+    window.history.pushState({}, "", `/get-details/?type=${this.type}&id=${this.id}`);
+    updateContent()
+    // let playerData = null;
 
-    if (this.type === "artist") {
-        playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
-    } else {
-        playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
-    }
-    const songsData = playerData.data.data;
-    if (this.type === "artist") {
-        musicPlayerData.currentSong = songsData.results[0];
-        musicPlayerData.songQueue = songsData.results;
-    } else if (this.type === "song") {
-        musicPlayerData.currentSong = songsData[0];
-        musicPlayerData.songQueue = songsData;
-    } else {
-        musicPlayerData.currentSong = songsData.songs[0];
-        musicPlayerData.songQueue = songsData.songs;
-    }
-    musicPlayerData.songIndex = 0;
+    // if (this.type === "artist") {
+    //     playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
+    // } else {
+    //     playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
+    // }
+    // const songsData = playerData.data.data;
+    // if (this.type === "artist") {
+    //     musicPlayerData.currentSong = songsData.results[0];
+    //     musicPlayerData.songQueue = songsData.results;
+    // } else if (this.type === "song") {
+    //     musicPlayerData.currentSong = songsData[0];
+    //     musicPlayerData.songQueue = songsData;
+    // } else {
+    //     musicPlayerData.currentSong = songsData.songs[0];
+    //     musicPlayerData.songQueue = songsData.songs;
+    // }
+    // musicPlayerData.songIndex = 0;
 
-    playPauseBtn.classList.remove("fa-play");
-    playPauseBtn.classList.add("fa-pause");
-    queueData = [];
+    // playPauseBtn.classList.remove("fa-play");
+    // playPauseBtn.classList.add("fa-pause");
+    // queueData = [];
 
-    await playMusicPlayer();
-    await loadQueueData();
+    // await playMusicPlayer();
+    // await loadQueueData();
 }
 
 slider.oninput = function () {
