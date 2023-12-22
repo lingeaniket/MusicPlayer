@@ -246,7 +246,7 @@ function loadSongList(maindiv, data, type, id) {
     searchmain_01.className = "search27";
 
     const search18_img = document.createElement("img");
-    search18_img.srcset = data.image[2].link;
+    search18_img.src = data.image[2].link
 
     searchmain_01.append(search18_img);
 
