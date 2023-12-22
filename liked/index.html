@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/index.css" />
+        <link rel="stylesheet" href="/Queue/queue.css" />
+        <link rel="stylesheet" href="/SearchFunctions/search.css" />
+        <link rel="stylesheet" href="/MusicPlayer/player.css" />
+        <link rel="stylesheet" href="/getDetailsgenerator/details.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Borel&family=Cookie&family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&family=Lobster+Two&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Music Player</title>
+        <link rel="icon" href="/Images/fevicon1.ico" type="image/x-icon" />
+    </head>
+    <body>
+        <div class="main-grid">
+            <div class="left-sidebar">
+                <div class="sidebar">
+                    <div class="side01">
+                        <div class="sideIcon" onclick="handleHomeRoute()">
+                            <div>
+                                <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
+                            </div>
+                            <div>
+                                <p>Home</p>
+                            </div>
+                        </div>
+                        <div class="sideIcon" onclick="handleSearchRoute()">
+                            <div>
+                                <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
+                            </div>
+                            <div>
+                                <p>Search</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side01">
+                        <div class="side02">
+                            <div>
+                                <h4 class="side03">Your Library</h4>
+                            </div>
+                            <div class="side04">
+                                <div>
+                                    <div class="side05">
+                                        <div class="side06">
+                                            <i class="fa-solid fa-play" style="color: white"></i>
+                                        </div>
+                                        <div class="side07">Liked songs</div>
+                                    </div>
+                                    <div class="side05">
+                                        <div class="side06">
+                                            <i class="fa-solid fa-clock-rotate-left" style="color: white"></i>
+                                        </div>
+                                        <div class="side07">History</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="side03">Your Playlist</h4>
+                            </div>
+                            <div class="side08">
+                                <button class="sideAddbtn">+</button>
+                            </div>
+                            <div class="side04" id="your-playlists"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="main-container" id="main-container">
+                    <div style="padding: 8px 12px">
+                        <div style="padding: 8px 12px">
+                            <div style="display: flex; justify-content: center; justify-content: center; margin-bottom: 44px">
+                                <div
+                                    style="
+                                        height: 150px;
+                                        width: 150px;
+                                        background: linear-gradient(to top left, rgb(255, 255, 255), rgb(14, 0, 255));
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        border-radius: 8px;
+                                    "
+                                >
+                                    <i class="fa-solid fa-heart" style="color: white"></i>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-left: 22px">
+                                    <h1>Liked</h1>
+                                </div>
+                            </div>
+                            <div style="display: flex; margin: 0 0 44px -22px; height: 50px; border-bottom: 1px solid grey">
+                                <div style="padding-left: 22px; height: 100%; width: 100px">
+                                    <div
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            height: 100%;
+                                            width: calc(100px - 22px);
+                                            border-bottom: 2px solid black;
+                                        "
+                                    >
+                                        Songs
+                                    </div>
+                                </div>
+                                <div style="padding-left: 22px; height: 100%; width: 100px">
+                                    <div
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            height: 100%;
+                                            cursor: pointer;
+                                            width: calc(100px - 22px);
+                                        "
+                                    >
+                                        Playlists
+                                    </div>
+                                </div>
+                                <div style="padding-left: 22px; height: 100%; width: 100px">
+                                    <div
+                                        style="
+                                            display: flex;
+                                            cursor: pointer;
+                                            justify-content: center;
+                                            align-items: center;
+                                            height: 100%;
+                                            width: calc(100px - 22px);
+                                        "
+                                    >
+                                        Albums
+                                    </div>
+                                </div>
+                                <div style="padding-left: 22px; height: 100%; width: 100px">
+                                    <div
+                                        style="
+                                            cursor: pointer;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            height: 100%;
+                                            width: calc(100px - 22px);
+                                        "
+                                    >
+                                        Artists
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="queue queue-open" id="queue-side">
+                <div class="queue01">
+                    <div class="queue02">
+                        <div class="queue10">
+                            <div>Playlist</div>
+                            <div class="queue11" onclick="handleQueueOpen()">X</div>
+                        </div>
+                        <div>
+                            <div id="queue-current-song"></div>
+                            <div class="queue04" id="queue-stack">
+                                <div>
+                                    <h3>Next in queue</h3>
+                                </div>
+                                <div class="queue05" id="queue-playlist">
+                                    <!-- list -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="player not-playing" id="music-player-div">
+                <div class="player-container">
+                    <div>
+                        <div class="player-01" id="player-meta"></div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="player-04">
+                                <button disabled>
+                                    <i class="fa-solid fa-shuffle fa-lg" style="color: #ffffff"></i>
+                                </button>
+                                <button onclick="handlePrevSong()">
+                                    <i class="fa-solid fa-backward fa-lg" style="color: #ffffff"></i>
+                                </button>
+                                <button onclick="playPauseMusic()">
+                                    <i id="playPause" class="fa-solid fa-play fa-lg" style="color: #ffffff"></i>
+                                </button>
+                                <button onclick="handleNextSong()">
+                                    <i class="fa-solid fa-forward fa-lg" style="color: #ffffff"></i>
+                                </button>
+                                <button>
+                                    <i class="fa-solid fa-repeat fa-lg" style="color: #ffffff"></i>
+                                </button>
+                            </div>
+                            <audio src="" id="music-player-main" onended="handleNextSong()">
+                                <!-- <source src="" id="music-player-main" type=""> -->
+                            </audio>
+                            <div class="song-main-range">
+                                <div id="song-current-time">--:--</div>
+                                <div class="song-range">
+                                    <input type="range" name="" step="0.000001" id="song-range" />
+                                    <div id="selector">
+                                        <div class="selectorBtn"></div>
+                                    </div>
+                                    <div id="progressBar"></div>
+                                </div>
+                                <div id="song-duration">--:--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="width: 100%; display: flex; align-items: center; height: 100%">
+                            <div style="padding: 18px; display: flex; align-items: center; height: 100%">
+                                <div>
+                                    <i class="fa-solid fa-volume-high fa-lg"></i>
+                                    <input type="range" name="" id="" />
+                                </div>
+                                <div>
+                                    <button style="cursor: pointer; height: 30px" onclick="handleQueueOpen()">
+                                        <i class="fa-solid fa-play fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="top-bar">
+                <div style="padding: 8px">
+                    <div style="padding: 0px 12px; display: flex; justify-content: space-between">
+                        <div class="sideIcon" onclick="handleHomeRoute()">
+                            <div>
+                                <i class="fa-solid fa-house fa-lg" style="color: #ffffff"></i>
+                            </div>
+                            <div>
+                                <p>Home</p>
+                            </div>
+                        </div>
+                        <div class="sideIcon" onclick="handleSearchRoute()">
+                            <div>
+                                <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff"></i>
+                            </div>
+                            <div>
+                                <p>Search</p>
+                            </div>
+                        </div>
+                        <div class="sideIcon">
+                            <div>
+                                <svg
+                                    data-encore-id="icon"
+                                    role="img"
+                                    aria-hidden="true"
+                                    viewBox="0 0 24 24"
+                                    class="Svg-sc-ytk21e-0 iYxpxA"
+                                    style="height: 24px; width: 24px; fill: rgb(255, 255, 255)"
+                                >
+                                    <path
+                                        d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Playlist</p>
+                            </div>
+                        </div>
+                        <div class="sideIcon">
+                            <div>
+                                <i class="fa-solid fa-circle-user fa-lg" style="color: #ffffff"></i>
+                            </div>
+                            <div>
+                                <p>Account</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/e0ab3f7c74.js" crossorigin="anonymous"></script>
+    <script src="/index.js"></script>
+    <script src="/Queue/queue.js"></script>
+    <script src="/MusicPlayer/MusicPlayer.js"></script>
+    <script src="/SearchFunctions/searchFunctions.js"></script>
+    <script src="/getDetailsgenerator/getDetailsgenerator.js"></script>
+    <script src="/LikedFunctions/likedFunctions.js"></script>
+</html>
