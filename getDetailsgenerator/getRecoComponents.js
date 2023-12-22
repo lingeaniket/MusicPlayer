@@ -60,8 +60,6 @@ async function loadRecommendations(type, player) {
                 );
                 data = songData.data;
             }
-            console.log(data);
-
             div01.append(h31);
 
             const div02 = document.createElement("div");
