@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="/SearchFunctions/search.css" />
         <link rel="stylesheet" href="/MusicPlayer/player.css" />
         <link rel="stylesheet" href="/getDetailsgenerator/details.css" />
+        <link rel="stylesheet" href="/LikedFunctions/liked.css">
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <link
             href="https://fonts.googleapis.com/css2?family=Borel&family=Cookie&family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&family=Lobster+Two&display=swap"
@@ -46,11 +47,11 @@
                             </div>
                             <div class="side04">
                                 <div>
-                                    <div class="side05">
+                                    <div class="side05" onclick="handleLikeRoute()">
                                         <div class="side06">
-                                            <i class="fa-solid fa-play" style="color: white"></i>
+                                            <i class="fa-solid fa-heart" style="color: white"></i>
                                         </div>
-                                        <div class="side07">Liked songs</div>
+                                        <div class="side07">Liked</div>
                                     </div>
                                     <div class="side05">
                                         <div class="side06">
@@ -72,88 +73,7 @@
                 </div>
             </div>
             <div class="main-content">
-                <div class="main-container" id="main-container">
-                    <div style="padding: 8px 12px">
-                        <div style="padding: 8px 12px">
-                            <div style="display: flex; justify-content: center; justify-content: center; margin-bottom: 44px">
-                                <div
-                                    style="
-                                        height: 150px;
-                                        width: 150px;
-                                        background: linear-gradient(to top left, rgb(255, 255, 255), rgb(14, 0, 255));
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                        border-radius: 8px;
-                                    "
-                                >
-                                    <i class="fa-solid fa-heart" style="color: white"></i>
-                                </div>
-                                <div style="display: flex; align-items: center; margin-left: 22px">
-                                    <h1>Liked</h1>
-                                </div>
-                            </div>
-                            <div style="display: flex; margin: 0 0 44px -22px; height: 50px; border-bottom: 1px solid grey">
-                                <div style="padding-left: 22px; height: 100%; width: 100px">
-                                    <div
-                                        style="
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            height: 100%;
-                                            width: calc(100px - 22px);
-                                            border-bottom: 2px solid black;
-                                        "
-                                    >
-                                        Songs
-                                    </div>
-                                </div>
-                                <div style="padding-left: 22px; height: 100%; width: 100px">
-                                    <div
-                                        style="
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            height: 100%;
-                                            cursor: pointer;
-                                            width: calc(100px - 22px);
-                                        "
-                                    >
-                                        Playlists
-                                    </div>
-                                </div>
-                                <div style="padding-left: 22px; height: 100%; width: 100px">
-                                    <div
-                                        style="
-                                            display: flex;
-                                            cursor: pointer;
-                                            justify-content: center;
-                                            align-items: center;
-                                            height: 100%;
-                                            width: calc(100px - 22px);
-                                        "
-                                    >
-                                        Albums
-                                    </div>
-                                </div>
-                                <div style="padding-left: 22px; height: 100%; width: 100px">
-                                    <div
-                                        style="
-                                            cursor: pointer;
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            height: 100%;
-                                            width: calc(100px - 22px);
-                                        "
-                                    >
-                                        Artists
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="main-container" id="main-container"></div>
             </div>
             <div class="queue queue-open" id="queue-side">
                 <div class="queue01">
