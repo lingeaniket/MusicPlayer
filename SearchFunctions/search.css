@@ -68,6 +68,9 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-color: white;
 }
+.search-input::placeholder {
+    color: rgba(0, 0, 0, 0.589);
+}
 
 .search-icon-div {
     position: absolute;
@@ -284,6 +287,7 @@
 
     .search-input {
         width: calc(100vw - 60vw);
+        font-size: 14px;
     }
 }
 @media screen and (max-width: 600px) {
@@ -315,13 +319,13 @@
         right: 0;
     }
 
-    .search02{
+    .search02 {
         flex-direction: column;
         margin-bottom: 11px;
     }
 
     .search-input {
-        width: 100%;
+        width: calc(100vw - 100px);
     }
 
     .search03 {
@@ -329,5 +333,4 @@
         width: 100%;
         justify-content: space-between;
     }
-
 }
