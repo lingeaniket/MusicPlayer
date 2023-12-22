@@ -226,12 +226,7 @@ function loadSongList(maindiv, data, type, id) {
     const searchmain = document.createElement("div");
     searchmain.className = "search27";
 
-    if (type === "search") {
-        const search18_img = document.createElement("img");
-        search18_img.srcset = data.image[2].link;
-
-        searchmain.append(search18_img);
-    } else {
+    if (type !== "search") {
         const div1 = document.createElement("div");
         div1.className = "search22";
         div1.style.fontSize = "14px";
@@ -240,7 +235,20 @@ function loadSongList(maindiv, data, type, id) {
         div1.innerText = id + 1;
 
         searchmain.append(div1);
+        search18.append(searchmain);
+        search17.append(search18);
     }
+
+    const search18_01 = document.createElement("div");
+    search18_01.className = "search18 searchImage";
+
+    const searchmain_01 = document.createElement("div");
+    searchmain_01.className = "search27";
+
+    const search18_img = document.createElement("img");
+    search18_img.srcset = data.image[2].link;
+
+    searchmain_01.append(search18_img);
 
     const hovPlay = document.createElement("div");
     hovPlay.className = "search25";
@@ -250,9 +258,7 @@ function loadSongList(maindiv, data, type, id) {
     const search26 = document.createElement("div");
     search26.className = "search26";
 
-    if (type === "search") {
-        search26.style.backgroundColor = "#000000d3;";
-    }
+    search26.style.backgroundColor = "#000000d3";
 
     const i3 = document.createElement("i");
     i3.className = "fa-solid fa-play fa-sm";
@@ -260,9 +266,9 @@ function loadSongList(maindiv, data, type, id) {
 
     search26.append(i3);
     hovPlay.append(search26);
-    searchmain.append(hovPlay);
-    search18.append(searchmain);
-    search17.append(search18);
+    searchmain_01.append(hovPlay);
+    search18_01.append(searchmain_01);
+    search17.append(search18_01);
 
     const search24 = document.createElement("div");
     search24.className = "search24";
@@ -297,7 +303,7 @@ function loadSongList(maindiv, data, type, id) {
 
     const i22 = document.createElement("i");
     i22.onclick = handleLike.bind({ ...data, type: "song" });
-    if (likedData.song.some((val) => val === data.id)) {
+    if (likedData.song.some((val) => val.id === data.id)) {
         i22.className = "fa-solid fa-heart fa-lg";
     } else {
         i22.className = "fa-regular fa-heart fa-lg";

@@ -1,13 +1,24 @@
 let timerData = null;
+let isArtist = false;
+
+let totalArtistSongs = 0;
+let currentQueuePage = 0;
+let currentArtistId = null;
 
 async function playCategory(event) {
     event.stopPropagation();
+    isArtist = this.type === "artist" ? true : false;
+    currentQueuePage = 0;
+    totalArtistSongs = 0;
 
     let playerData = null;
     musicPlayerData.songIndex = 0;
 
     if (this.type === "artist") {
         playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
+        totalArtistSongs = playerData.data.data.total;
+        currentQueuePage = 1;
+        currentArtistId = this.id;
     } else {
         playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
     }
@@ -126,6 +137,14 @@ function playPauseMusic() {
 }
 
 async function handleNextSong() {
+    if (isArtist && musicPlayerData.songIndex + 1 === musicPlayerData.songQueue.length && currentQueuePage * 10 < totalArtistSongs) {
+        currentQueuePage = currentQueuePage + 1;
+        const playerData = await axios.get(`https://saavn.me/artists/${currentArtistId}/songs?page=${currentQueuePage}`);
+        playerData.data.data.results.forEach((data) => {
+            musicPlayerData.songQueue.push(data);
+        });
+        // musicPlayerData.songQueue = [...musicPlayerData.songQueue, ...playerData.data.data.results];
+    }
     if (musicPlayerData.songQueue[musicPlayerData.songIndex + 1]) {
         musicPlayerData.currentSong = musicPlayerData.songQueue[musicPlayerData.songIndex + 1];
         musicPlayerData.songIndex += 1;

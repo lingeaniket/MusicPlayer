@@ -1,3 +1,10 @@
+let player = "";
+let playerSongs = "";
+let totalSongs = "";
+let currentPage = 0;
+let lastpage = true;
+
+let songList = null;
 async function loadDetails() {
     const searchquerey = window.location.search;
     const query = new URLSearchParams(searchquerey);
@@ -10,13 +17,12 @@ async function loadDetails() {
 
     const playerData = await axios.get(`https://saavn.me/${type}s?id=${id}`);
 
-    let player = "";
-
-    let playerSongs = "";
-
     if (type === "artist") {
         const songs = await axios.get(`https://saavn.me/artists/${id}/songs?page=1`);
         playerSongs = songs.data.data.results;
+        lastpage = songs.data.data.lastpage;
+        totalSongs = songs.data.data.total;
+        currentPage = 1;
         player = playerData.data.data;
     } else if (type === "song") {
         player = playerData.data.data[0];
@@ -24,9 +30,16 @@ async function loadDetails() {
         const albumdata = await axios.get(`https://saavn.me/albums?id=${albumid}`);
 
         playerSongs = albumdata.data.data.songs;
+
+        currentPage = 0;
+        lastpage = true;
+        totalSongs = 0;
     } else {
         player = playerData.data.data;
         playerSongs = player.songs;
+        totalSongs = 0;
+        currentPage = 0;
+        lastpage = true;
     }
 
     const details01 = document.createElement("div");
@@ -133,7 +146,7 @@ async function loadDetails() {
         btn_i1.className = "fa-regular fa-heart fa-lg";
     }
 
-    btn_i1.onclick = handleLike.bind({ type, id });
+    btn_i1.onclick = handleLike.bind({ type, id, ...player });
 
     btn07_02.append(btn_i1);
     div07_02.append(btn07_02);
@@ -170,6 +183,8 @@ async function loadDetails() {
 
         const details09 = document.createElement("div");
         details09.className = "details09";
+        details09.id = "songList";
+        songList = details09;
 
         let newIndex = 0;
         for (let i = 0; i < playerSongs.length; i++) {
@@ -179,39 +194,65 @@ async function loadDetails() {
             }
             loadSongList(details09, playerSongs[i], "", i + newIndex);
         }
+        if (!lastpage) {
+            const div2 = document.createElement("div");
+            div2.className = "loadMore";
+            div2.id = "loadMoreButton";
+            const btn1 = document.createElement("button");
+            btn1.className = "loadMoreBtn";
+            btn1.innerText = "Load more";
+            btn1.onclick = loadMoreSongs.bind({ id });
+            div2.append(btn1);
+            details09.append(div2);
+        }
         div1.append(details09);
     }
 
     details01_1.append(div1);
 
-    // details02.append(details05);
+    const details03_01 = document.createElement("div");
+    details03_01.className = "details03";
+    details03_01.id = "details-rec-01";
+    details01_1.append(details03_01);
 
-    // details01_1.append(details02);
+    const details03_02 = document.createElement("div");
+    details03_02.className = "details03";
+    details03_02.id = "details-rec-02";
+    details01_1.append(details03_02);
+
+    details01_1.id = "details-01-div";
     details01.append(details01_1);
     mainContainer.append(details01);
 
-    // <div class="details01">
-    //     <div class="details01">
-    //         <div>
-    //             <div class="details08" style="">
-    //                 <h4>mores songs from same album</h4>
-    //             </div>
-    //             <div class="details09"></div>
-    //         </div>
-    //         <div class="details03">
-    //             <div>
-    //                 <h3>Top albums of same artist</h3>
-    //             </div>
-    //             <div>
-    //                 <div class="cat-01">
-    //                     <div class="lismain"></div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         <div>related playlist</div>
+    loadRecommendations(type, player);
 }
 
 async function openDetails() {
     window.history.pushState({}, "", `/get-details/?type=${this.type}&id=${this.id}`);
     updateContent();
+}
+
+async function loadMoreSongs() {
+    currentPage++;
+    const songs = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=${currentPage}`);
+    lastpage = songs.data.data.lastpage;
+    console.log(playerSongs);
+
+    for (let i = 0; i < songs.data.data.results.length; i++) {
+        loadSongList(songList, playerSongs[i], "", i + playerSongs.length);
+    }
+    playerSongs = [...playerSongs, ...songs.data.data.results];
+    const moreButton = document.getElementById("loadMoreButton");
+    songList.removeChild(moreButton);
+    if (!lastpage) {
+        const div2 = document.createElement("div");
+        div2.className = "loadMore";
+        div2.id = "loadMoreButton";
+        const btn1 = document.createElement("button");
+        btn1.className = "loadMoreBtn";
+        btn1.innerText = "Load more";
+        btn1.onclick = loadMoreSongs.bind({ id: this.id });
+        div2.append(btn1);
+        songList.append(div2);
+    }
 }
