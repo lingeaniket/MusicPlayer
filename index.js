@@ -66,6 +66,9 @@ function createListItems(data, cat01, type) {
 
         const listImage = document.createElement("div");
         listImage.classList.add("listImage");
+        if (list.type === "artist") {
+            listImage.style.borderRadius = "50%";
+        }
 
         const listimg = document.createElement("img");
         listimg.src = Array.isArray(list.image) ? list.image[2].link : list.image;
@@ -105,29 +108,31 @@ function createListItems(data, cat01, type) {
         listabs3.append(listi1);
         listabs.append(listabs3);
         listHov.append(listabs);
+        if (list.type !== "artist") {
+            const div1 = document.createElement("div");
 
-        const div1 = document.createElement("div");
+            const i1 = document.createElement("i");
+            i1.onclick = handleLike.bind(list);
 
-        const i1 = document.createElement("i");
-        i1.onclick = handleLike.bind(list);
+            if (likedData[list.type].some((val) => val.id === list.id)) {
+                i1.className = "fa-solid fa-heart fa-lg";
+            } else {
+                i1.className = "fa-regular fa-heart fa-lg";
+            }
 
-        if (likedData[list.type].some((val) => val === list.id)) {
-            i1.className = "fa-solid fa-heart fa-lg";
-        } else {
-            i1.className = "fa-regular fa-heart fa-lg";
+            div1.appendChild(i1);
+            listHov.append(div1);
+
+            const div2 = document.createElement("div");
+
+            const i2 = document.createElement("i");
+            i2.style.color = "white";
+            i2.className = "fa-solid fa-ellipsis fa-lg";
+
+            div2.appendChild(i2);
+            listHov.append(div2);
         }
 
-        div1.appendChild(i1);
-        listHov.append(div1);
-
-        const div2 = document.createElement("div");
-
-        const i2 = document.createElement("i");
-        i2.style.color = "white";
-        i2.className = "fa-solid fa-ellipsis fa-lg";
-
-        div2.appendChild(i2);
-        listHov.append(div2);
         listBtns.append(listHov);
         listImage.append(listBtns);
 
@@ -138,6 +143,7 @@ function createListItems(data, cat01, type) {
         titleh4.innerText = list.name ? list.name.replace(/&quot;/g, '"') : list.title.replace(/&quot;/g, '"');
 
         listTitle.append(titleh4);
+        // if(list.type )
 
         const titleP = document.createElement("p");
         titleP.innerText =
@@ -157,7 +163,9 @@ function createListItems(data, cat01, type) {
                         ? convertArtistToString(list.primaryArtists)
                         : list.primaryArtists
                     : list.subtitle
-                : list.subtitle;
+                : list.type !== "artist"
+                ? list.subtitle
+                : "";
 
         listTitle.append(titleP);
 
@@ -197,7 +205,7 @@ window.addEventListener("popstate", function () {
 });
 
 window.onload = () => {
-    // updateContent();
+    updateContent();
 };
 
 async function handleLike(event) {

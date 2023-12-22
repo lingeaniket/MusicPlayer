@@ -258,7 +258,7 @@ function loadSongList(maindiv, data, type, id) {
     const search26 = document.createElement("div");
     search26.className = "search26";
 
-    search26.style.backgroundColor = "#000000d3";
+    search26.style.backgroundColor = "#0000007e";
 
     const i3 = document.createElement("i");
     i3.className = "fa-solid fa-play fa-sm";

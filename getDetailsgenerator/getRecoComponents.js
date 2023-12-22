@@ -11,13 +11,13 @@ async function loadRecommendations(type, player) {
             if (i === 0) {
                 h31.innerText = "You May Like";
                 const songData = await axios.get(
-                    `http://localhost:5000/api/v1/music/get-song-yml?songId=${player.id}&language=${player.language}&year=${player.year}&albumId=${player.album.id}`
+                    `https://music-streaming-api.onrender.com/api/v1/music/get-song-yml?songId=${player.id}&language=${player.language}&year=${player.year}&albumId=${player.album.id}`
                 );
                 data = songData.data;
             } else {
                 h31.innerText = "Top songs of same artist";
                 const songData = await axios.get(
-                    `http://localhost:5000/api/v1/music/get-tsosar?songId=${player.id}&language=${player.language}&artistId=${player.primaryArtistsId}`
+                    `https://music-streaming-api.onrender.com/api/v1/music/get-tsosar?songId=${player.id}&language=${player.language}&artistId=${player.primaryArtistsId}`
                 );
                 data = songData.data;
             }
@@ -118,6 +118,5 @@ async function loadRecommendations(type, player) {
         detailRec01.append(div01);
         detailRec01.append(div02);
         maindiv.append(detailRec01);
-        // https://saavn.me/artists/568707/albums?page=1
     }
 }
