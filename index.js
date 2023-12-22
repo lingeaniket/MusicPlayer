@@ -52,7 +52,12 @@ const loadSongs = async () => {
 
 function createListItems(data, cat01, type) {
     for (let i = 0; i < data.length; i++) {
-        const list = data[i];
+        let list = {};
+        if (type === "song-yml") {
+            list = { ...data[i], type: "song" };
+        } else {
+            list = data[i];
+        }
 
         const listMain = document.createElement("div");
         listMain.classList.add("listmain");
@@ -130,12 +135,7 @@ function createListItems(data, cat01, type) {
         listTitle.classList.add("list-title");
 
         const titleh4 = document.createElement("h4");
-        titleh4.innerText =
-            type === "search" || type === "topTrend"
-                ? list.title.replace(/&quot;/g, '"')
-                : list.type === "album" || list.type === "song"
-                ? list.name.replace(/&quot;/g, '"')
-                : list.title.replace(/&quot;/g, '"');
+        titleh4.innerText = list.name ? list.name.replace(/&quot;/g, '"') : list.title.replace(/&quot;/g, '"');
 
         listTitle.append(titleh4);
 
@@ -146,9 +146,17 @@ function createListItems(data, cat01, type) {
                 : type === "search"
                 ? list.description
                 : list.type === "album"
-                ? convertArtistToString(list.artists)
+                ? list.artists
+                    ? Array.isArray(list.artists)
+                        ? convertArtistToString(list.artists)
+                        : list.artists
+                    : list.subtitle
                 : list.type === "song"
-                ? convertArtistToString(list.primaryArtists)
+                ? list.primaryArtists
+                    ? Array.isArray(list.primaryArtists)
+                        ? convertArtistToString(list.primaryArtists)
+                        : list.primaryArtists
+                    : list.subtitle
                 : list.subtitle;
 
         listTitle.append(titleP);
@@ -167,6 +175,8 @@ const updateContent = () => {
         loadSearch();
     } else if (window.location.pathname.includes("/get-details")) {
         loadDetails();
+    } else if (window.location.pathname.includes("/liked")) {
+        loadLiked();
     } else {
         loadSongs();
     }
@@ -187,13 +197,14 @@ window.addEventListener("popstate", function () {
 });
 
 window.onload = () => {
-    updateContent();
+    // updateContent();
 };
 
 async function handleLike(event) {
     var buttonElement = event.target.closest("i");
-    console.log(this)
-    const { type, id } = this;
+    console.log(this);
+    const { type, id, image, primaryArtists, artists, name, title, subtitle } = this;
+    const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
 
     event.stopPropagation();
 
@@ -203,15 +214,21 @@ async function handleLike(event) {
         buttonElement.classList.remove("fa-solid");
         buttonElement.classList.add("fa-regular");
 
-        const index = likedData[type].indexOf(id);
+        // const index = likedData[type].indexOf(id);
+        const index = likedData[type].findIndex((item) => item.id === id);
         likedData[type].splice(index, 1);
 
         localStorage.setItem("liked-data", JSON.stringify(likedData));
     } else {
         buttonElement.classList.add("fa-solid");
         buttonElement.classList.remove("fa-regular");
-        likedData[type].push(id);
+        likedData[type].push(obj);
 
         localStorage.setItem("liked-data", JSON.stringify(likedData));
     }
+}
+
+async function handleLikeRoute() {
+    window.history.pushState({}, "", "/liked");
+    updateContent();
 }
