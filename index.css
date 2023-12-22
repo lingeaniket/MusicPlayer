@@ -159,7 +159,7 @@ a {
     inset: 0;
     width: 100%;
     padding: 8px;
-    background-color: #000000d3;
+    background-color: #0000007e;
     opacity: 0;
     aspect-ratio: 1/1;
     transition: all 0.3s ease-in-out;
@@ -231,7 +231,15 @@ a {
     width: 100%;
     display: flex;
     align-items: center;
+    border-radius: 8px;
+    transition:  all 0.3s ease-in-out;
+    cursor: pointer;
     margin: 20px 0;
+}
+
+.side05:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+
 }
 
 .side06 {
