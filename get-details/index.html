@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/SearchFunctions/search.css" />
         <link rel="stylesheet" href="/MusicPlayer/player.css" />
         <link rel="stylesheet" href="/getDetailsgenerator/details.css" />
-        <link rel="stylesheet" href="/LikedFunctions/liked.css">
+        <link rel="stylesheet" href="/LikedFunctions/liked.css" />
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <link
             href="https://fonts.googleapis.com/css2?family=Borel&family=Cookie&family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&family=Lobster+Two&display=swap"
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="side07">Liked</div>
                                     </div>
-                                    <div class="side05">
+                                    <div class="side05" onclick="handleHistoryRoute()">
                                         <div class="side06">
                                             <i class="fa-solid fa-clock-rotate-left" style="color: white"></i>
                                         </div>
@@ -96,7 +96,16 @@
                     </div>
                 </div>
             </div>
-            <div class="player not-playing" id="music-player-div">
+            <div class="player" id="music-player-div">
+                <div class="song-main-range">
+                    <div class="song-range">
+                        <input type="range" name="" step="0.000001" id="song-range1" />
+                        <div id="selector1">
+                            <div class="selectorBtn"></div>
+                        </div>
+                        <div id="progressBar1"></div>
+                    </div>
+                </div>
                 <div class="player-container">
                     <div>
                         <div class="player-01" id="player-meta"></div>
@@ -120,17 +129,17 @@
                                     <i class="fa-solid fa-repeat fa-lg" style="color: #ffffff"></i>
                                 </button>
                             </div>
-                            <audio src="" id="music-player-main" onended="handleNextSong()">
+                            <audio src="" id="music-player-main" onended="handleNextSong('ended')">
                                 <!-- <source src="" id="music-player-main" type=""> -->
                             </audio>
                             <div class="song-main-range">
                                 <div id="song-current-time">--:--</div>
                                 <div class="song-range">
-                                    <input type="range" name="" step="0.000001" id="song-range" />
-                                    <div id="selector">
+                                    <input type="range" name="" step="0.000001" id="song-range2" />
+                                    <div id="selector2">
                                         <div class="selectorBtn"></div>
                                     </div>
-                                    <div id="progressBar"></div>
+                                    <div id="progressBar2"></div>
                                 </div>
                                 <div id="song-duration">--:--</div>
                             </div>
