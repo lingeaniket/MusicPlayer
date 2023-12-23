@@ -193,17 +193,11 @@ async function handleNextSong(mode) {
             musicPlayer.pause();
         }
         slider1.value = 0;
-        selector1.style.left = "0%";
-        progressBar1.style.width = "0%";
-
-        slider2.value = 0;
-        selector2.style.left = "0%";
-        progressBar2.style.width = "0%";
+        
         playPauseBtn.classList.add("fa-play");
         playPauseBtn.classList.remove("fa-pause");
-        songCurrentTime.innerText = formatTime(slider1.value);
-
-        songDuration.innerText = formatTime(musicPlayer.duration);
+        handleSlider(1)
+        
     }
 }
 
