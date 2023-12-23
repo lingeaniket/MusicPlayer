@@ -80,34 +80,6 @@ async function loadLiked(mode) {
     list01_02.append(list08);
     list01_01.append(list01_02);
     mainContainer.appendChild(list01_01);
-
-    // <div class="liked01">
-    //     <div class="liked01">
-    //         <div class="liked02">
-    //             <div class="liked03">
-    //                 <i class="fa-solid fa-heart" style="color: white"></i>
-    //             </div>
-    //             <div class="liked04">
-    //                 <h1>Liked</h1>
-    //             </div>
-    //         </div>
-    //         <div class="liked05">
-    //             <div class="liked06">
-    //                 <div class="liked07">Songs</div>
-    //             </div>
-    //             <div class="liked06">
-    //                 <div class="liked07">Playlists</div>
-    //             </div>
-    //             <div class="liked06">
-    //                 <div class="liked07">Albums</div>
-    //             </div>
-    //             <div class="liked06">
-    //                 <div class="liked07">Artists</div>
-    //             </div>
-    //         </div>
-    //         <div id="liked-data" class="liked08"></div>
-    //     </div>
-    // </div>;
 }
 
 function loadSelectedCat(event) {
@@ -133,7 +105,7 @@ function loadSelectedCat(event) {
             createListItems(recentData[type], cat1);
             likedDiv.append(cat1);
         } else {
-            likedDiv.innerHTML = `No liked ${type}s`;
+            likedDiv.innerHTML = `No ${type}s`;
         }
     }
 }

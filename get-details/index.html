@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/MusicPlayer/player.css" />
         <link rel="stylesheet" href="/getDetailsgenerator/details.css" />
         <link rel="stylesheet" href="/LikedFunctions/liked.css" />
+        <link rel="stylesheet" href="/PlaylistAccess/playlist.css" />
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <link
             href="https://fonts.googleapis.com/css2?family=Borel&family=Cookie&family=Grand+Hotel&family=Lato:wght@100;300;400;700;900&family=Lobster+Two&display=swap"
@@ -65,9 +66,11 @@
                                 <h4 class="side03">Your Playlist</h4>
                             </div>
                             <div class="side08">
-                                <button class="sideAddbtn">+</button>
+                                <button class="sideAddbtn" onclick="addPlaylist()">+</button>
                             </div>
-                            <div class="side04" id="your-playlists"></div>
+                            <div class="side04">
+                                <div class="playlist01" id="your-playlists"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,4 +225,5 @@
     <script src="/getDetailsgenerator/getDetailsgenerator.js"></script>
     <script src="/getDetailsgenerator/getRecoComponents.js"></script>
     <script src="/LikedFunctions/likedFunctions.js"></script>
+    <script src="/PlaylistAccess/playlistAccess.js"></script>
 </html>

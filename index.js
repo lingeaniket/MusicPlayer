@@ -20,6 +20,10 @@ const recentData = localStorage.getItem("recent-data")
     ? JSON.parse(localStorage.getItem("recent-data"))
     : { song: [], playlist: [], artist: [], album: [] };
 
+const myPlaylistData = localStorage.getItem("my-playlist-data")
+    ? JSON.parse(localStorage.getItem("my-playlist-data"))
+    : { lastId: 0, data: [] };
+
 const musicPlayerData = {
     currentSong: 0,
     songIndex: 0,
@@ -71,6 +75,9 @@ function createListItems(data, cat01, type) {
 
         const mainDiv = document.createElement("div");
 
+        const imgdiv = document.createElement("div");
+        imgdiv.className = "imgDiv";
+
         const listImage = document.createElement("div");
         listImage.classList.add("listImage");
         if (list.type === "artist") {
@@ -81,7 +88,8 @@ function createListItems(data, cat01, type) {
         listimg.src = Array.isArray(list.image) ? list.image[2].link : list.image;
         listImage.append(listimg);
 
-        mainDiv.append(listImage);
+        imgdiv.append(listImage);
+        mainDiv.append(imgdiv);
 
         const listBtns = document.createElement("div");
         listBtns.className = "listBtns";
@@ -131,12 +139,16 @@ function createListItems(data, cat01, type) {
             listHov.append(div1);
 
             const div2 = document.createElement("div");
+            div2.onclick = loadOptions.bind(list);
 
             const i2 = document.createElement("i");
+
             i2.style.color = "white";
             i2.className = "fa-solid fa-ellipsis fa-lg";
 
             div2.appendChild(i2);
+            // const div3 = document.createElement("div");
+            // const indiv1 = document.createElement("div");
             listHov.append(div2);
         }
 
@@ -218,6 +230,7 @@ async function handleLikeRoute() {
 const updateContent = () => {
     const content = document.getElementById("main-container");
     content.innerHTML = "";
+    loadPlaylist();
 
     if (window.location.pathname.includes("/search")) {
         loadSearch();
@@ -231,6 +244,10 @@ const updateContent = () => {
         loadSongs();
     }
 };
+
+function loadOptions(event) {
+    const { type } = this;
+}
 
 const handleHomeRoute = () => {
     window.history.pushState({}, "", "/");

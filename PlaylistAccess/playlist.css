@@ -1,0 +1,58 @@
+.playlist01 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.playlist02 {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    /* border-radius: 8px; */
+    transition: all 0.3s ease-in-out;
+    padding: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.playlist02:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+    border-color: black;
+}
+
+.playlist03 {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.12);
+    align-items: center;
+}
+
+.playlist04 {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.playlist04 > img {
+    width: 50%;
+    vertical-align: middle;
+}
+
+.playlist05 {
+    margin-left: 11px;
+}
+
+.playlist05 > p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.playlist05 > h5 {
+    margin: 0px 0 5px;
+}
