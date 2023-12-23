@@ -172,7 +172,7 @@ function playPauseMusic() {
 
 async function handleNextSong(mode) {
     if (mode === "ended") {
-        addToRecent(musicPlayerData.currentSong);
+        addToRecent({ ...musicPlayerData.currentSong, type: "song" });
     }
 
     if (isArtist && musicPlayerData.songIndex + 1 === musicPlayerData.songQueue.length && currentQueuePage * 10 < totalArtistSongs) {
@@ -188,6 +188,22 @@ async function handleNextSong(mode) {
         musicPlayerData.songIndex += 1;
         await playMusicPlayer();
         await loadQueueData();
+    } else {
+        if (musicPlayer.src) {
+            musicPlayer.pause();
+        }
+        slider1.value = 0;
+        selector1.style.left = "0%";
+        progressBar1.style.width = "0%";
+
+        slider2.value = 0;
+        selector2.style.left = "0%";
+        progressBar2.style.width = "0%";
+        playPauseBtn.classList.add("fa-play");
+        playPauseBtn.classList.remove("fa-pause");
+        songCurrentTime.innerText = formatTime(slider1.value);
+
+        songDuration.innerText = formatTime(musicPlayer.duration);
     }
 }
 
@@ -216,8 +232,10 @@ async function addToRecent(data) {
     const { type, id, image, primaryArtists, artists, name, title, subtitle } = data;
     const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
     let elIndex = null;
+    console.log(data);
 
     if (
+        recentData[type] &&
         recentData[type].some((val, index) => {
             if (val.id === id) {
                 elIndex = index;
