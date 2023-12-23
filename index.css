@@ -305,6 +305,15 @@ a {
         width: 33.3333%;
     }
 
+    .side06{
+        width: 35%;
+    }
+
+    .side07{
+        margin-left: 11px;
+        font-size: 14px;
+    }
+
     .queue-added .listmain {
         width: 33.33%;
     }
