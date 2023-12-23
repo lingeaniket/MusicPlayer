@@ -1,8 +1,11 @@
 const mainDiv = document.getElementById("mainDiv");
-const slider = document.getElementById("song-range");
-const selector = document.getElementById("selector");
+const slider1 = document.getElementById("song-range1");
+const selector1 = document.getElementById("selector1");
+const slider2 = document.getElementById("song-range2");
+const selector2 = document.getElementById("selector2");
 const playPauseBtn = document.getElementById("playPause");
-const progressBar = document.getElementById("progressBar");
+const progressBar1 = document.getElementById("progressBar1");
+const progressBar2 = document.getElementById("progressBar2");
 const songDuration = document.getElementById("song-duration");
 const mainContainer = document.getElementById("main-container");
 const musicPlayer = document.getElementById("music-player-main");
@@ -11,6 +14,10 @@ const songCurrentTime = document.getElementById("song-current-time");
 
 const likedData = localStorage.getItem("liked-data")
     ? JSON.parse(localStorage.getItem("liked-data"))
+    : { song: [], playlist: [], artist: [], album: [] };
+
+const recentData = localStorage.getItem("recent-data")
+    ? JSON.parse(localStorage.getItem("recent-data"))
     : { song: [], playlist: [], artist: [], album: [] };
 
 const musicPlayerData = {
@@ -175,6 +182,39 @@ function createListItems(data, cat01, type) {
     }
 }
 
+async function handleLike(event) {
+    var buttonElement = event.target.closest("i");
+    const { type, id, image, primaryArtists, artists, name, title, subtitle } = this;
+    const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
+
+    event.stopPropagation();
+
+    const classList = buttonElement.classList;
+
+    if (classList.contains("fa-solid")) {
+        buttonElement.classList.remove("fa-solid");
+        buttonElement.classList.add("fa-regular");
+
+        // const index = likedData[type].indexOf(id);
+        const index = likedData[type].findIndex((item) => item.id === id);
+        likedData[type].splice(index, 1);
+    } else {
+        buttonElement.classList.add("fa-solid");
+        buttonElement.classList.remove("fa-regular");
+        likedData[type].push(obj);
+    }
+    localStorage.setItem("liked-data", JSON.stringify(likedData));
+}
+
+async function handleHistoryRoute() {
+    window.history.pushState({}, "", "/history");
+    updateContent();
+}
+async function handleLikeRoute() {
+    window.history.pushState({}, "", "/liked");
+    updateContent();
+}
+
 const updateContent = () => {
     const content = document.getElementById("main-container");
     content.innerHTML = "";
@@ -184,7 +224,9 @@ const updateContent = () => {
     } else if (window.location.pathname.includes("/get-details")) {
         loadDetails();
     } else if (window.location.pathname.includes("/liked")) {
-        loadLiked();
+        loadLiked("liked");
+    } else if (window.location.pathname.includes("/history")) {
+        loadLiked("history");
     } else {
         loadSongs();
     }
@@ -207,36 +249,3 @@ window.addEventListener("popstate", function () {
 window.onload = () => {
     updateContent();
 };
-
-async function handleLike(event) {
-    var buttonElement = event.target.closest("i");
-    console.log(this);
-    const { type, id, image, primaryArtists, artists, name, title, subtitle } = this;
-    const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
-
-    event.stopPropagation();
-
-    const classList = buttonElement.classList;
-
-    if (classList.contains("fa-solid")) {
-        buttonElement.classList.remove("fa-solid");
-        buttonElement.classList.add("fa-regular");
-
-        // const index = likedData[type].indexOf(id);
-        const index = likedData[type].findIndex((item) => item.id === id);
-        likedData[type].splice(index, 1);
-
-        localStorage.setItem("liked-data", JSON.stringify(likedData));
-    } else {
-        buttonElement.classList.add("fa-solid");
-        buttonElement.classList.remove("fa-regular");
-        likedData[type].push(obj);
-
-        localStorage.setItem("liked-data", JSON.stringify(likedData));
-    }
-}
-
-async function handleLikeRoute() {
-    window.history.pushState({}, "", "/liked");
-    updateContent();
-}

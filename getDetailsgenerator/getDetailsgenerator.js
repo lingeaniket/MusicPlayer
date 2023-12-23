@@ -116,7 +116,7 @@ async function loadDetails() {
             : type === "album"
             ? `${player.songCount} Song${player.songCount > 1 ? "s" : ""}`
             : type === "artist"
-            ? `${player.dominantLanguage}, Fans : ${player.dominantType}`
+            ? `${player.dominantLanguage}, ${player.dominantType}`
             : `${player.firstname} ${player.lastname}`;
 
     div06_02.append(p06_02);

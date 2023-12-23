@@ -7,6 +7,7 @@ let currentArtistId = null;
 
 async function playCategory(event) {
     event.stopPropagation();
+    addToRecent(this);
     isArtist = this.type === "artist" ? true : false;
     currentQueuePage = 0;
     totalArtistSongs = 0;
@@ -43,22 +44,48 @@ async function playCategory(event) {
     await loadQueueData();
 }
 
-slider.oninput = function () {
+slider1.oninput = function () {
+    handleSlider(1);
+};
+
+slider2.oninput = function () {
+    handleSlider(2);
+};
+
+async function handleSlider(slider) {
     if (timerData) {
         clearInterval(timerData);
     }
+    if (slider === 1) {
+        //change in slider1
+        slider2.value = slider1.value;
+        handleProgress();
+    } else {
+        slider1.value = slider2.value;
+        handleProgress();
+    }
+}
 
-    musicPlayer.currentTime = slider.value;
-    selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
-    progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
+async function handleProgress() {
+    musicPlayer.currentTime = slider1.value;
+    selector1.style.left = (slider1.value * 100) / musicPlayer.duration + "%";
+    progressBar1.style.width = (slider1.value * 100) / musicPlayer.duration + "%";
 
+    selector2.style.left = (slider2.value * 100) / musicPlayer.duration + "%";
+    progressBar2.style.width = (slider2.value * 100) / musicPlayer.duration + "%";
     timerData = setInterval(() => {
-        slider.value = musicPlayer.currentTime;
-        selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
-        progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
-        songCurrentTime.innerText = formatTime(slider.value);
+        slider1.value = musicPlayer.currentTime;
+        selector1.style.left = (slider1.value * 100) / musicPlayer.duration + "%";
+        progressBar1.style.width = (slider1.value * 100) / musicPlayer.duration + "%";
+
+        slider2.value = musicPlayer.currentTime;
+        selector2.style.left = (slider2.value * 100) / musicPlayer.duration + "%";
+        progressBar2.style.width = (slider2.value * 100) / musicPlayer.duration + "%";
+        songCurrentTime.innerText = formatTime(slider1.value);
+
+        songDuration.innerText = formatTime(musicPlayer.duration);
     }, 500);
-};
+}
 
 async function playMusicPlayer() {
     musicPlayerData.currentSongDetails = musicPlayerData.currentSong;
@@ -66,18 +93,25 @@ async function playMusicPlayer() {
     musicPlayer.src = musicPlayerData.currentSongDetails.downloadUrl[4].link;
 
     musicPlayer.onloadedmetadata = function () {
-        slider.max = musicPlayer.duration;
-        slider.value = musicPlayer.currentTime;
+        slider1.max = musicPlayer.duration;
+        slider1.value = musicPlayer.currentTime;
+        slider2.max = musicPlayer.duration;
+        slider2.value = musicPlayer.currentTime;
     };
 
     mainMusicPlayer.classList.remove("not-playing");
     updateCurrentSongDetails();
     musicPlayer.play();
     timerData = setInterval(() => {
-        slider.value = musicPlayer.currentTime;
-        selector.style.left = (slider.value * 100) / musicPlayer.duration + "%";
-        progressBar.style.width = (slider.value * 100) / musicPlayer.duration + "%";
-        songCurrentTime.innerText = formatTime(slider.value);
+        slider1.value = musicPlayer.currentTime;
+        selector1.style.left = (slider1.value * 100) / musicPlayer.duration + "%";
+        progressBar1.style.width = (slider1.value * 100) / musicPlayer.duration + "%";
+
+        slider2.value = musicPlayer.currentTime;
+        selector2.style.left = (slider2.value * 100) / musicPlayer.duration + "%";
+        progressBar2.style.width = (slider2.value * 100) / musicPlayer.duration + "%";
+        songCurrentTime.innerText = formatTime(slider1.value);
+
         songDuration.innerText = formatTime(musicPlayer.duration);
     }, 500);
 }
@@ -136,7 +170,11 @@ function playPauseMusic() {
     }
 }
 
-async function handleNextSong() {
+async function handleNextSong(mode) {
+    if (mode === "ended") {
+        addToRecent(musicPlayerData.currentSong);
+    }
+
     if (isArtist && musicPlayerData.songIndex + 1 === musicPlayerData.songQueue.length && currentQueuePage * 10 < totalArtistSongs) {
         currentQueuePage = currentQueuePage + 1;
         const playerData = await axios.get(`https://saavn.me/artists/${currentArtistId}/songs?page=${currentQueuePage}`);
@@ -172,4 +210,34 @@ function convertArtistToString(artists) {
         }
     });
     return titleString;
+}
+
+async function addToRecent(data) {
+    const { type, id, image, primaryArtists, artists, name, title, subtitle } = data;
+    const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
+    let elIndex = null;
+
+    if (
+        recentData[type].some((val, index) => {
+            if (val.id === id) {
+                elIndex = index;
+            }
+            return val.id === id;
+        })
+    ) {
+        recentData[type].splice(elIndex, 1);
+    }
+    if (type === "song") {
+        if (recentData[type].length === 99) {
+            recentData[type].pop();
+        }
+    } else {
+        if (recentData[type].length === 23) {
+            recentData[type].pop();
+        }
+    }
+
+    recentData[type].unshift(obj);
+
+    localStorage.setItem("recent-data", JSON.stringify(recentData));
 }
