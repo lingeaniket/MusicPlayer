@@ -7,6 +7,7 @@ let currentArtistId = null;
 
 async function playCategory(event) {
     event.stopPropagation();
+    closeForceOptions();
     addToRecent(this);
     isArtist = this.type === "artist" ? true : false;
     currentQueuePage = 0;
@@ -193,11 +194,10 @@ async function handleNextSong(mode) {
             musicPlayer.pause();
         }
         slider1.value = 0;
-        
+
         playPauseBtn.classList.add("fa-play");
         playPauseBtn.classList.remove("fa-pause");
-        handleSlider(1)
-        
+        handleSlider(1);
     }
 }
 
@@ -226,8 +226,6 @@ async function addToRecent(data) {
     const { type, id, image, primaryArtists, artists, name, title, subtitle } = data;
     const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
     let elIndex = null;
-    console.log(data);
-
     if (
         recentData[type] &&
         recentData[type].some((val, index) => {

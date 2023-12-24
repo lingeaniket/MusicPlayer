@@ -139,6 +139,7 @@ function createListItems(data, cat01, type) {
             listHov.append(div1);
 
             const div2 = document.createElement("div");
+            div2.className = "options";
             div2.onclick = loadOptions.bind(list);
 
             const i2 = document.createElement("i");
@@ -150,6 +151,9 @@ function createListItems(data, cat01, type) {
             // const div3 = document.createElement("div");
             // const indiv1 = document.createElement("div");
             listHov.append(div2);
+            const div3 = document.createElement("div");
+            div3.className = "optionsDiv";
+            listHov.append(div3);
         }
 
         listBtns.append(listHov);
@@ -192,6 +196,35 @@ function createListItems(data, cat01, type) {
         listMain.append(mainDiv);
         cat01.append(listMain);
     }
+}
+
+function handleLikeFromOptions(event) {
+    event.stopPropagation();
+    const parent = event.target.closest(".listhov");
+    const { type, id, image, primaryArtists, artists, name, title, subtitle } = this;
+    const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
+    if (parent) {
+        const heart = parent.querySelector(".fa-heart");
+        if (heart) {
+            if (heart.classList.contains("fa-regular")) {
+                heart.classList.remove("fa-regular");
+                heart.classList.add("fa-solid");
+                likedData[type].push(obj);
+                event.target.innerText = "Remove from Library";
+            } else {
+                heart.classList.add("fa-regular");
+                heart.classList.remove("fa-solid");
+                const index = likedData[type].findIndex((item) => item.id === id);
+                likedData[type].splice(index, 1);
+
+                event.target.innerText = "Save to Library";
+            }
+        }
+    }
+    localStorage.setItem("liked-data", JSON.stringify(likedData));
+    closeForceOptions();
+
+    // console.log(likedData)
 }
 
 async function handleLike(event) {
@@ -246,7 +279,25 @@ const updateContent = () => {
 };
 
 function loadOptions(event) {
-    const { type } = this;
+    closeOptions(event);
+    event.stopPropagation();
+    const { top, left } = event.target.parentNode.getBoundingClientRect();
+
+    const optionsDiv = event.target.parentNode.getElementsByClassName("optionsDiv")[0];
+    optionsDiv.style.opacity = 1;
+    optionsDiv.style.visibility = "visible";
+    backToPlaylist.bind(this)(optionsDiv);
+    // console.log(optionsDiv);
+    if (top > window.innerHeight / 2) {
+        optionsDiv.style.bottom = "10%";
+    } else {
+        optionsDiv.style.top = "100%";
+    }
+    if (left < window.innerWidth / 2) {
+        optionsDiv.style.right = "-100%";
+    } else {
+        optionsDiv.style.right = "10%";
+    }
 }
 
 const handleHomeRoute = () => {
@@ -262,6 +313,48 @@ const handleSearchRoute = () => {
 window.addEventListener("popstate", function () {
     updateContent();
 });
+
+function closeForceOptions() {
+    const containers = document.querySelectorAll(".options");
+    const containersArray = Array.from(containers);
+
+    for (let i = 0; i < containersArray.length; i++) {
+        const val = containersArray[i];
+        const optionsDiv = val.parentNode.getElementsByClassName("optionsDiv")[0];
+        optionsDiv.style.visibility = "hidden";
+        optionsDiv.style.opacity = 0;
+    }
+}
+
+function closeOptions(event) {
+    if (!(event.target.classList.contains("options") || event.target.parentNode.classList.contains("optionsDiv"))) {
+        const optionsDiv = Array.from(document.getElementsByClassName("optionsDiv"));
+
+        optionsDiv.forEach((val) => {
+            val.style.visibility = "hidden";
+            val.style.opacity = 0;
+        });
+    } else if (event.target.classList.contains("options")) {
+        const containers = document.querySelectorAll(".options");
+        const containersArray = Array.from(containers);
+        const clickedContainerIndex = containersArray.findIndex((container) => {
+            return container === event.target || container.contains(event.target);
+        });
+
+        if (clickedContainerIndex > -1) {
+            for (let i = 0; i < containersArray.length; i++) {
+                if (i !== clickedContainerIndex) {
+                    const val = containersArray[i];
+                    const optionsDiv = val.parentNode.getElementsByClassName("optionsDiv")[0];
+                    optionsDiv.style.visibility = "hidden";
+                    optionsDiv.style.opacity = 0;
+                }
+            }
+        }
+    }
+}
+
+window.addEventListener("click", closeOptions);
 
 window.onload = () => {
     updateContent();
