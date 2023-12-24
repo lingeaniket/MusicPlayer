@@ -144,7 +144,6 @@ a {
 
 .imgDiv {
     position: relative;
-
 }
 
 .listmain {
@@ -165,13 +164,24 @@ a {
     /* overflow: hidden; */
     width: 100%;
     padding: 8px;
-    background-color: #0000007e;
-    opacity: 0;
+    /* opacity: 0; */
     aspect-ratio: 1/1;
     transition: all 0.3s ease-in-out;
 }
 
 .listmain > div:hover .listBtns {
+    background-color: #0000007e;
+    /* opacity: 1; */
+}
+.listmain .listhov > div:nth-of-type(1),
+.listmain .listhov > div:nth-of-type(2),
+.listmain .listhov > div:nth-of-type(3) {
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+.listmain > div:hover .listhov > div:nth-of-type(1),
+.listmain > div:hover .listhov > div:nth-of-type(2),
+.listmain > div:hover .listhov > div:nth-of-type(3) {
     opacity: 1;
 }
 
@@ -283,6 +293,47 @@ a {
     color: white;
 }
 
+.fa-ellipsis {
+    pointer-events: none;
+}
+
+/* .options.optionsOpen {
+
+} */
+
+.optionsDiv {
+    position: absolute;
+    /* visibility: ; */
+    z-index: 3;
+    width: 150px;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    padding: 8px 0;
+    box-shadow: 0px 4px 12px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.optionsDiv > div {
+    padding: 12px 18px;
+    overflow: visible;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    white-space: nowrap;
+}
+.optionsDiv > div > * {
+    pointer-events: none;
+}
+
+.optionsDiv > div:hover {
+    background-color: rgba(43, 197, 180, 0.1);
+}
+
 @media screen and (max-width: 1260px) {
     .left-sidebar {
         width: 200px;
@@ -307,11 +358,11 @@ a {
         width: 33.3333%;
     }
 
-    .side06{
+    .side06 {
         width: 35%;
     }
 
-    .side07{
+    .side07 {
         margin-left: 11px;
         font-size: 14px;
     }
