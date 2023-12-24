@@ -36,7 +36,12 @@ body {
 .left-sidebar {
     grid-area: left-sidebar;
     width: 350px;
+    overflow: scroll;
     border-right: 2px solid brown;
+}
+
+.left-sidebar::-webkit-scrollbar {
+    display: none;
 }
 
 .main-content {
@@ -228,7 +233,7 @@ a {
 }
 
 .side01 {
-    margin-bottom: 22px;
+    margin-bottom: 11px;
 }
 
 .side02 {
@@ -236,7 +241,7 @@ a {
 }
 
 .side03 {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
 }
 
 .side04 {
@@ -258,7 +263,7 @@ a {
 }
 
 .side06 {
-    width: 20%;
+    width: 50px;
     aspect-ratio: 1/1;
     background: linear-gradient(to top left, rgb(255, 255, 255), rgb(14, 0, 255));
     display: flex;
@@ -295,6 +300,82 @@ a {
 
 .fa-ellipsis {
     pointer-events: none;
+}
+
+.lang01 {
+    padding: 8px 12px;
+}
+
+.lang02 {
+    margin: 0 0 11px 0;
+}
+
+.lang03 {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+
+.lang03 > div{
+    pointer-events: none;
+}
+
+.lang04 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lang04 > div:first-of-type {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.lang05 {
+    margin-left: 10px;
+}
+
+.lang06 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-size: 12px;
+    margin: 5px 0 0 5px;
+}
+
+.formOpen {
+    display: none;
+}
+
+.form01 {
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.form02 {
+    display: block;
+    cursor: pointer;
+    margin: 2px 0;
+}
+
+.form03 {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.langSub {
+    border: 1px solid green;
+    color: white;
+    border-radius: 999px;
+    padding: 6px 9px;
+    background-color: green;
+    font-size: 12px;
+    margin: 10px 0;
 }
 
 /* .options.optionsOpen {
