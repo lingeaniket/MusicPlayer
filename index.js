@@ -24,6 +24,26 @@ const myPlaylistData = localStorage.getItem("my-playlist-data")
     ? JSON.parse(localStorage.getItem("my-playlist-data"))
     : { lastId: 0, data: [] };
 
+const avilableLanguages = [
+    "Hindi",
+    "English",
+    "Punjabi",
+    "Tamil",
+    "Telugu",
+    "Marathi",
+    "Gujarati",
+    "Bengali",
+    "Kannada",
+    "Bhojpuri",
+    "Malayalam",
+    "Urdu",
+    "Haryanvi",
+    "Rajasthani",
+    "Odia",
+    "Assamese",
+];
+let localLanguages = localStorage.getItem("local-languages") ? JSON.parse(localStorage.getItem("local-languages")) : ["hindi", "english"];
+
 const musicPlayerData = {
     currentSong: 0,
     songIndex: 0,
@@ -32,7 +52,7 @@ const musicPlayerData = {
 };
 
 const loadSongs = async () => {
-    const list = await axios.get("https://saavn.me/modules?language=hindi,english,tamil,telugu");
+    const list = await axios.get(`https://saavn.me/modules?language=${localLanguages.toString()}`);
     const homeData = list.data.data;
 
     for (let key in homeData) {
@@ -264,6 +284,7 @@ const updateContent = () => {
     const content = document.getElementById("main-container");
     content.innerHTML = "";
     loadPlaylist();
+    loadLanguages();
 
     if (window.location.pathname.includes("/search")) {
         loadSearch();
@@ -277,6 +298,87 @@ const updateContent = () => {
         loadSongs();
     }
 };
+
+function handleToggleLang(event) {
+    const formId = document.getElementById("languageForm");
+    const itag = event.target.closest(".lang01").getElementsByTagName("i")[0];
+    if (formId.classList.contains("formOpen")) {
+        formId.classList.remove("formOpen");
+        document.getElementById("12");
+
+        itag.classList.remove("fa-chevron-down");
+        itag.classList.add("fa-chevron-up");
+    } else {
+        formId.classList.add("formOpen");
+        itag.classList.add("fa-chevron-down");
+        itag.classList.remove("fa-chevron-up");
+    }
+}
+
+function loadLanguages() {
+    const formId = document.getElementById("languageForm");
+    formId.innerHTML = "";
+
+    formId.onsubmit = handlelanguages;
+    const langDiv = document.getElementById("selectedLanguages");
+    langDiv.innerText = localLanguages.toString().replaceAll(",", ", ");
+
+    const div1 = document.createElement("div");
+    div1.className = "form01";
+
+    for (let i = 0; i < avilableLanguages.length; i++) {
+        const label1 = document.createElement("label");
+        label1.htmlFor = avilableLanguages[i].toLowerCase();
+        label1.className = "form02";
+        const input1 = document.createElement("input");
+        input1.type = "checkbox";
+        input1.value = avilableLanguages[i].toLowerCase();
+        input1.id = avilableLanguages[i].toLowerCase();
+        input1.name = "languages";
+        input1.checked = localLanguages.some((val) => val.toLowerCase() === avilableLanguages[i].toLowerCase());
+        const span1 = document.createElement("span");
+        span1.className = "form03";
+        span1.innerText = avilableLanguages[i];
+        label1.append(input1);
+        label1.append(span1);
+        div1.append(label1);
+    }
+
+    const butto1 = document.createElement("button");
+    butto1.innerText = "Update";
+    butto1.className = "langSub";
+    div1.append(butto1);
+
+    // butto1.onclick = handlelanguages;
+
+    formId.append(div1);
+}
+
+function handlelanguages(event) {
+    event.preventDefault();
+    const formId = document.getElementById("languageForm");
+    const checkboxes = formId.querySelectorAll('input[name="languages"]');
+
+    // Create an array to store values of checked checkboxes
+    const checkedValues = [];
+
+    // Iterate through the checkboxes and push the values of checked ones
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            checkedValues.push(checkbox.value);
+        }
+    });
+    localLanguages = checkedValues;
+
+    localStorage.setItem("local-languages", JSON.stringify(checkedValues));
+
+    loadLanguages();
+    handleToggleLang(event);
+    if (window.location.pathname === "/") {
+        loadSongs();
+    }
+    // updateContent();
+}
 
 function loadOptions(event) {
     closeOptions(event);
