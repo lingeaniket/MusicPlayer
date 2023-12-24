@@ -52,6 +52,7 @@ const musicPlayerData = {
 };
 
 const loadSongs = async () => {
+    mainContainer.innerHTML = "";
     const list = await axios.get(`https://saavn.me/modules?language=${localLanguages.toString()}`);
     const homeData = list.data.data;
 
@@ -168,8 +169,6 @@ function createListItems(data, cat01, type) {
             i2.className = "fa-solid fa-ellipsis fa-lg";
 
             div2.appendChild(i2);
-            // const div3 = document.createElement("div");
-            // const indiv1 = document.createElement("div");
             listHov.append(div2);
             const div3 = document.createElement("div");
             div3.className = "optionsDiv";
@@ -186,7 +185,6 @@ function createListItems(data, cat01, type) {
         titleh4.innerText = list.name ? list.name.replace(/&quot;/g, '"') : list.title.replace(/&quot;/g, '"');
 
         listTitle.append(titleh4);
-        // if(list.type )
 
         const titleP = document.createElement("p");
         titleP.innerText =
@@ -243,8 +241,6 @@ function handleLikeFromOptions(event) {
     }
     localStorage.setItem("liked-data", JSON.stringify(likedData));
     closeForceOptions();
-
-    // console.log(likedData)
 }
 
 async function handleLike(event) {
@@ -259,8 +255,6 @@ async function handleLike(event) {
     if (classList.contains("fa-solid")) {
         buttonElement.classList.remove("fa-solid");
         buttonElement.classList.add("fa-regular");
-
-        // const index = likedData[type].indexOf(id);
         const index = likedData[type].findIndex((item) => item.id === id);
         likedData[type].splice(index, 1);
     } else {
@@ -349,8 +343,6 @@ function loadLanguages() {
     butto1.className = "langSub";
     div1.append(butto1);
 
-    // butto1.onclick = handlelanguages;
-
     formId.append(div1);
 }
 
@@ -359,10 +351,8 @@ function handlelanguages(event) {
     const formId = document.getElementById("languageForm");
     const checkboxes = formId.querySelectorAll('input[name="languages"]');
 
-    // Create an array to store values of checked checkboxes
     const checkedValues = [];
 
-    // Iterate through the checkboxes and push the values of checked ones
     checkboxes.forEach((checkbox) => {
         if (checkbox.checked) {
             checkedValues.push(checkbox.value);
@@ -374,10 +364,10 @@ function handlelanguages(event) {
 
     loadLanguages();
     handleToggleLang(event);
-    if (window.location.pathname === "/") {
+
+    if (window.location.pathname === "/" || window.location.pathname === "") {
         loadSongs();
     }
-    // updateContent();
 }
 
 function loadOptions(event) {
