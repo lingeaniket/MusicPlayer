@@ -3,10 +3,7 @@ async function addPlaylist() {
     const lastPlaylist = myPlaylistData.lastId;
     const obj = { name: `Playlist#${lastPlaylist + 1}`, id: new Date().getTime(), songs: [] };
     myPlaylistData.data.push(obj);
-    const inHtml = playlist.innerHTML;
-    playlist.innerHTML = "";
-    createPlaylistItem(playlist, obj);
-    playlist.append(inHtml);
+    updatePlaylist()
     myPlaylistData.lastId++;
 
     localStorage.setItem("my-playlist-data", JSON.stringify(myPlaylistData));

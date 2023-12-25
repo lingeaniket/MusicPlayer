@@ -49,14 +49,54 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid transparent;
   }
   
   .liked07.selected {
     font-weight: 600;
-    border-bottom: 2px solid black;
+    border-color: black;
   
 }
 
 .liked07:hover {
     background-color: #00000011;
+}
+
+@media screen and (max-width: 600px) {
+    .liked02 {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    .liked01{
+        padding: 8px 0;
+    }
+
+    .liked05 {
+        margin-bottom: 22px;
+    }
+
+    .liked06{
+        width: 25%;
+    }
+
+    .liked07{
+        width: 100%;
+        /* font-size: 14px; */
+    }
+    
+}
+@media screen and (max-width: 425px) {
+
+    .liked06{
+       
+        padding-left: 11px;
+    }
+
+    .liked07{
+        width: calc(100% - 11px);
+        font-size: 12px;
+    }
+    
 }
