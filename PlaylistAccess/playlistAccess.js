@@ -24,6 +24,7 @@ function backToPlaylist(event) {
         parentNode.innerHTML = "";
 
         const div1 = document.createElement("div");
+        // console.log(this)
         if (likedData[this.type].some((val) => val.id === this.id)) {
             div1.innerText = "Remove from Library";
         } else {

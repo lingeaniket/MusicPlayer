@@ -375,7 +375,6 @@ function handlelanguages(event) {
 
 function loadOptions(event) {
     closeOptions(event);
-    console.log(event.target);
     event.stopPropagation();
     const { top, left } = event.target.parentNode.getBoundingClientRect();
 

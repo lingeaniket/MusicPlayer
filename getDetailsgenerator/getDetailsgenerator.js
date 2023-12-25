@@ -146,7 +146,7 @@ async function loadDetails() {
         btn_i1.className = "fa-regular fa-heart fa-lg";
     }
 
-    btn_i1.onclick = handleLike.bind({ type, id, ...player });
+    btn_i1.onclick = handleLike.bind({...player, type, id });
 
     btn07_02.append(btn_i1);
     div07_02.append(btn07_02);
@@ -154,7 +154,7 @@ async function loadDetails() {
 
     const div07_03 = document.createElement("div");
     const btn07_03 = document.createElement("button");
-    btn07_03.onclick = loadOptions.bind({ type, id, ...player });
+    btn07_03.onclick = loadOptions.bind({ ...player, type, id });
     const btn_i2 = document.createElement("i");
     btn_i2.className = "fa-solid fa-ellipsis fa-xl";
     const div2 = document.createElement("div");
