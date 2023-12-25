@@ -28,7 +28,7 @@
     margin-left: 22px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 100%;
     justify-content: space-between;
 }
@@ -87,6 +87,7 @@
 .details07 > div:nth-of-type(3) button {
     width: 45px;
     height: 45px;
+    position: relative;
     border-radius: 50%;
     cursor: pointer;
     display: flex;

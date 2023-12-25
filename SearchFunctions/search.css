@@ -180,12 +180,21 @@
     cursor: pointer;
     height: 50px;
     border-radius: 5px;
-    margin: 5px 0;
-    transition: background-color 0.3s ease-in-out;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
 }
 
 .search17:hover {
-    background-color: rgba(0, 0, 0, 0.12);
+    background-color: white;
+    border-color: darkgrey;
+}
+
+.search17 i.fa-heart {
+    transition: color 0.3s ease-in-out;
+}
+
+.search17:hover i.fa-heart.fa-regular {
+    color: black;
 }
 
 .search18 {
@@ -238,6 +247,7 @@
 .search22 {
     height: 100%;
     aspect-ratio: 1/1;
+    position: relative;
     display: flex;
     justify-content: center;
     transition: all 0.3s ease-in-out;
@@ -249,7 +259,7 @@
 }
 
 .search24 {
-    width: calc(100% - 174px);
+    width: calc(100% - 225px);
 }
 
 .search25 {
@@ -271,10 +281,50 @@
     position: relative;
     border-radius: 5px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
 }
 
 .search17:hover .search25 {
     opacity: 1;
+}
+
+.search22 i.fa-ellipsis {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.search17:hover .search22 i.fa-ellipsis {
+    opacity: 1;
+}
+
+.song-options {
+    opacity: 1;
+    position: absolute;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.search17:hover .song-options {
+    opacity: 0;
+}
+
+.search17:hover .search22 {
+    font-size: 16px;
+}
+
+.song-id {
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+    /* font-weight: 600; */
+    font-weight: 600;
+}
+
+.search17:hover .song-id {
+    transform: scale(1.01);
 }
 /* .search17:hover .search27 .search22 {
     opacity: 0;
@@ -305,6 +355,21 @@
     .search10 {
         flex-direction: column;
     }
+    .search17 > .search18 {
+        display: none;
+    }
+
+    .search17 > div:nth-of-type(4) {
+        display: none;
+    }
+
+    .search22 .song-options {
+        display: none;
+    }
+
+    .search22 i.fa-ellipsis {
+        opacity: 1;
+    }
 
     .search12 {
         margin: 0;
@@ -332,5 +397,10 @@
         margin: 0 0 11px 0;
         width: 100%;
         justify-content: space-between;
+    }
+
+    .search24 {
+        width: calc(100% - 48.4px);
+        margin-left: 22px;
     }
 }

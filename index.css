@@ -63,10 +63,16 @@ body {
     padding: 8px 12px;
     display: flex;
     border-radius: 8px;
+    position: relative;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     align-items: center;
     margin: 11px 0;
+}
+
+.sideIcon > div:first-of-type,
+.sideIcon > div:nth-of-type(2) {
+    pointer-events: none;
 }
 
 .sideIcon:hover {
@@ -81,6 +87,7 @@ body {
 .sideIcon p {
     margin: 0 12px;
     font-size: 16px;
+
     font-weight: 700;
 }
 
@@ -316,7 +323,7 @@ a {
     width: 100%;
 }
 
-.lang03 > div{
+.lang03 > div {
     pointer-events: none;
 }
 
@@ -386,6 +393,7 @@ a {
     position: absolute;
     /* visibility: ; */
     z-index: 3;
+    height: fit-content;
     width: 150px;
     border-radius: 8px;
     opacity: 0;
