@@ -118,7 +118,7 @@ function createListItems(data, cat01, type) {
         listBtns.onclick = openDetails.bind(list);
 
         const listHov = document.createElement("div");
-        listHov.className = "listhov";
+        listHov.className = "listhov save-library";
 
         const listabs = document.createElement("div");
         listabs.className = "listabs";
@@ -218,7 +218,8 @@ function createListItems(data, cat01, type) {
 
 function handleLikeFromOptions(event) {
     event.stopPropagation();
-    const parent = event.target.closest(".listhov");
+    console.log(this);
+    const parent = event.target.closest(".save-library");
     const { type, id, image, primaryArtists, artists, name, title, subtitle } = this;
     const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
     if (parent) {
@@ -288,6 +289,8 @@ const updateContent = () => {
         loadLiked("liked");
     } else if (window.location.pathname.includes("/history")) {
         loadLiked("history");
+    } else if (window.location.pathname.includes("/my-playlist")) {
+        loadMyPlaylist();
     } else {
         loadSongs();
     }
@@ -372,6 +375,7 @@ function handlelanguages(event) {
 
 function loadOptions(event) {
     closeOptions(event);
+    console.log(event.target);
     event.stopPropagation();
     const { top, left } = event.target.parentNode.getBoundingClientRect();
 
@@ -451,3 +455,13 @@ window.addEventListener("click", closeOptions);
 window.onload = () => {
     updateContent();
 };
+
+function handleOpenPlaylist(event) {
+    const parent = event.target.closest(".sideIcon");
+
+    if (parent.classList.contains("playlistClose")) {
+        parent.classList.remove("playlistClose");
+    } else {
+        parent.classList.add("playlistClose");
+    }
+}

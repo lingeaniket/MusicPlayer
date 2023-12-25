@@ -218,7 +218,7 @@ function loadSearchSongs(maindiv, data) {
 
 function loadSongList(maindiv, data, type, id) {
     const search17 = document.createElement("div");
-    search17.className = "search17";
+    search17.className = "search17 save-library";
 
     const search18 = document.createElement("div");
     search18.className = "search18";
@@ -228,9 +228,7 @@ function loadSongList(maindiv, data, type, id) {
 
     if (type !== "search") {
         const div1 = document.createElement("div");
-        div1.className = "search22";
-        div1.style.fontSize = "14px";
-        div1.style.fontWeight = "600";
+        div1.className = "search22 song-id";
 
         div1.innerText = id + 1;
 
@@ -246,7 +244,7 @@ function loadSongList(maindiv, data, type, id) {
     searchmain_01.className = "search27";
 
     const search18_img = document.createElement("img");
-    search18_img.src = data.image[2].link.replace("http:", "https")
+    search18_img.src = data.image[2].link.replace("http:", "https");
 
     searchmain_01.append(search18_img);
 
@@ -308,9 +306,27 @@ function loadSongList(maindiv, data, type, id) {
     } else {
         i22.className = "fa-regular fa-heart fa-lg";
     }
-
     search22.append(i22);
     search17.append(search22);
+    const search23 = document.createElement("div");
+    search23.className = "search22";
+    search23.onclick = loadOptions.bind({ ...data, type: "song" });
+
+    const i23 = document.createElement("i");
+    // i23.onclick = loadOptions.bind({ ...data, type: "song" });
+    i23.className = "fa-solid fa-ellipsis fa-lg";
+    const div1 = document.createElement("div");
+    div1.className = "song-options";
+
+    div1.innerText = formatTime(data.duration);
+
+    const optionsDiv = document.createElement("div");
+    optionsDiv.className = "optionsDiv";
+    search23.append(i23);
+    search23.append(optionsDiv);
+    search23.append(div1);
+    search17.append(search23);
+
     maindiv.append(search17);
 }
 

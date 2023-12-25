@@ -124,7 +124,7 @@ async function loadDetails() {
     details05.append(details06);
 
     const details07 = document.createElement("div");
-    details07.className = "details07";
+    details07.className = "details07 save-library";
 
     const div07_01 = document.createElement("div");
     const btn07_01 = document.createElement("button");
@@ -154,10 +154,14 @@ async function loadDetails() {
 
     const div07_03 = document.createElement("div");
     const btn07_03 = document.createElement("button");
+    btn07_03.onclick = loadOptions.bind({ type, id, ...player });
     const btn_i2 = document.createElement("i");
     btn_i2.className = "fa-solid fa-ellipsis fa-xl";
+    const div2 = document.createElement("div");
+    div2.className = "optionsDiv";
 
     btn07_03.append(btn_i2);
+    btn07_03.append(div2);
     div07_03.append(btn07_03);
     details07.append(div07_03);
 
