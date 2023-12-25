@@ -166,14 +166,14 @@
                         </div>
                     </div>
                     <div>
-                        <div style="width: 100%; display: flex; align-items: center; height: 100%">
-                            <div style="padding: 18px; display: flex; align-items: center; height: 100%">
+                        <div class="sound-div01">
+                            <div class="sound-div02">
                                 <div>
-                                    <i class="fa-solid fa-volume-high fa-lg"></i>
-                                    <input type="range" name="" id="" />
+                                    <i class="fa-solid fa-volume-high fa-sm"></i>
+                                    <input type="range" name="" id="" oninput="handleVolume(event)" min="0" max="100" />
                                 </div>
                                 <div>
-                                    <button style="cursor: pointer; height: 30px" onclick="handleQueueOpen()">
+                                    <button class="queue-button-side" onclick="handleQueueOpen()">
                                         <i class="fa-solid fa-play fa-sm"></i>
                                     </button>
                                 </div>
