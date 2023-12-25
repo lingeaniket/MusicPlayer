@@ -109,6 +109,7 @@ a {
 
 .main-container {
     padding: 8px 12px;
+    overflow: hidden;
 }
 
 .cat-01 {
