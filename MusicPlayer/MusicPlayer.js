@@ -117,12 +117,20 @@ async function playMusicPlayer() {
     }, 500);
 }
 
+function handleImageQueue() {
+    if (window.innerWidth < 600) {
+        handleQueueOpen();
+    }
+}
+
 function updateCurrentSongDetails() {
     const player = document.getElementById("player-meta");
     player.innerHTML = "";
 
     const player02 = document.createElement("div");
     player02.classList.add("player-02");
+
+    player02.onclick = handleImageQueue;
 
     const img01 = document.createElement("img");
     img01.src = musicPlayerData.currentSongDetails.image[2].link;
@@ -250,4 +258,11 @@ async function addToRecent(data) {
     recentData[type].unshift(obj);
 
     localStorage.setItem("recent-data", JSON.stringify(recentData));
+}
+
+function handleVolume(event) {
+    const volume = event.target.value;
+    console.log(volume);
+
+    musicPlayer.volume = Number(volume / 100);
 }
