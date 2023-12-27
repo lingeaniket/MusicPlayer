@@ -464,3 +464,6 @@ a {
 }
 
 
+img{
+    pointer-events: none;
+}
