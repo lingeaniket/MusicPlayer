@@ -169,34 +169,3 @@
     white-space: nowrap;
 }
 
-@media screen and (max-width: 768px) {
-    .playlist07 {
-        flex-direction: column;
-        margin: 0;
-    }
-
-    .playlist11 {
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        width: 100%;
-        align-items: center;
-    }
-    .playlist11 > * {
-        text-align: center;
-    }
-
-    .playlist12 {
-        margin-bottom: 0;
-    }
-}
-@media screen and (max-width: 600px) {
-    .playlist06 {
-        margin: 0;
-    }
-
-    .playlist08 {
-        height: 150px;
-        width: 150px;
-    }
-}
