@@ -1,8 +1,4 @@
-let currentViewSongs = [];
-let currentviewPage = 1;
-let currentViewAlbums = [];
-let currentViewPlaylists = [];
-let currentViewArtists = [];
+
 
 async function loadLiked(mode) {
     mainContainer.innerHTML = "";
@@ -19,11 +15,13 @@ async function loadLiked(mode) {
     list03.className = "liked03";
 
     const list01i = document.createElement("i");
+
     if (mode === "liked") {
         list01i.className = "fa-solid fa-heart";
     } else {
         list01i.className = "fa-solid fa-clock-rotate-left";
     }
+
     list01i.style.color = "white";
     list03.append(list01i);
     list02.append(list03);
@@ -56,6 +54,7 @@ async function loadLiked(mode) {
     });
 
     list01_02.append(list05);
+
     const list08 = document.createElement("div");
     list08.className = "liked08";
     list08.id = "liked-data";
@@ -83,16 +82,17 @@ async function loadLiked(mode) {
 }
 
 function loadSelectedCat(event) {
-    // event.target
+    const { type } = this;
     const likedDiv = document.getElementById("liked-data");
+    likedDiv.innerHTML = "";
+
     const liked = document.getElementsByClassName("selected")[0];
     liked.classList.remove("selected");
-    likedDiv.innerHTML = "";
-    const { type } = this;
     event.target.classList.add("selected");
 
     const cat1 = document.createElement("div");
     cat1.className = "cat-01";
+
     if (this.mode === "liked") {
         if (likedData[type].length > 0) {
             createListItems(likedData[type], cat1);

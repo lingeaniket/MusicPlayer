@@ -89,14 +89,18 @@ async function loadRecommendations(type, player) {
         div01.append(h31);
 
         const div02 = document.createElement("div");
+
         const cat01 = document.createElement("div");
         cat01.className = "cat-01";
+
         createListItems(data, cat01, "");
+
         div02.append(cat01);
 
         detailRec01.append(div01);
         detailRec01.append(div02);
         maindiv.append(detailRec01);
+        
     } else if (type === "artist") {
         const h31 = document.createElement("h3");
         const div01 = document.createElement("div");
