@@ -93,6 +93,7 @@ function createListItems(data, cat01, type) {
 
         const listMain = document.createElement("div");
         listMain.classList.add("listmain");
+        listMain.setAttribute("tabindex", 0);
 
         const mainDiv = document.createElement("div");
 
@@ -115,7 +116,7 @@ function createListItems(data, cat01, type) {
         const listBtns = document.createElement("div");
         listBtns.className = "listBtns";
 
-        listBtns.onclick = openDetails.bind(list);
+        addEventListenerList(listBtns, list);
 
         const listHov = document.createElement("div");
         listHov.className = "listhov save-library";
@@ -214,6 +215,40 @@ function createListItems(data, cat01, type) {
         listMain.append(mainDiv);
         cat01.append(listMain);
     }
+}
+
+function addEventListenerList(btn, data) {
+    let isLongPress = false;
+    let longPressTimer = null;
+    btn.addEventListener("click", () => {
+        if (!isLongPress) {
+            // console.log("click event")
+            openDetails.bind(data)();
+        }
+        isLongPress = false;
+    });
+
+    btn.addEventListener("mousedown", function (event) {
+        longPressTimer = setTimeout(function () {
+            loadOptions.bind(data)(event);
+            isLongPress = true;
+        }, 500); // Set a timeout of 1000 milliseconds (adjust as needed)
+    });
+
+    btn.addEventListener("mouseup", function () {
+        clearTimeout(longPressTimer);
+    });
+
+    btn.addEventListener("touchstart", function (event) {
+        longPressTimer = setTimeout(function () {
+            loadOptions.bind(data)(event);
+            isLongPress = true;
+        }, 500);
+    });
+
+    btn.addEventListener("touchend", function () {
+        clearTimeout(longPressTimer);
+    });
 }
 
 function handleLikeFromOptions(event) {
