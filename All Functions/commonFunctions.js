@@ -223,7 +223,7 @@ function loadSongList(maindiv, data, type, id) {
     search21.className = "search21";
 
     const p21 = document.createElement("p");
-    p21.innerText = data.primaryArtists;
+    p21.innerText = convertName(data.primaryArtists);
 
     search21.append(p21);
     search19.append(search21);
