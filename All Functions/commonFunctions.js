@@ -85,7 +85,6 @@ function closeForceOptions() {
     }
 }
 
-
 async function addCategoryToPlaylist(event) {
     event.stopPropagation();
     if (this.type === "song") {
@@ -138,7 +137,17 @@ function convertArtistToString(artists) {
 }
 
 function convertName(name) {
-    return decodeURIComponent(name);
+    const sequenceMap = {
+        "%20": " ",
+        "%22": '"',
+        "%27": "'",
+        "%2C": ",",
+        "%3F": "?",
+        "&quot;": '"',
+        "&amp;": "&",
+    };
+
+    return name.replace(/%20|%22|%27|%2C|%3F|&quot;|&amp;/g, (match) => sequenceMap[match]);
 }
 
 function loadSongList(maindiv, data, type, id) {
@@ -203,7 +212,7 @@ function loadSongList(maindiv, data, type, id) {
     search20.className = "search20";
 
     const h320 = document.createElement("h3");
-    h320.innerText = type === "search" ? data.title : data.name;
+    h320.innerText = convertName(type === "search" ? data.title : data.name);
 
     h320.onclick = openDetails.bind({ ...data, type: "song" }); // routes.js
 
