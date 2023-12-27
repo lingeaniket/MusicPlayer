@@ -311,7 +311,7 @@
     }
 
     .search24 {
-        width: calc(100% - 48.4px);
+        width: calc(100% - 48.4px)!important;
         margin-left: 22px;
     }
 

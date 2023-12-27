@@ -1,7 +1,7 @@
 function loadOptions(event) {
     closeOptions(event);
     event.stopPropagation();
-    const { top, left } = event.target.parentNode.getBoundingClientRect();
+    const { top, right } = event.target.parentNode.getBoundingClientRect();
 
     const optionsDiv = event.target.parentNode.getElementsByClassName("optionsDiv")[0];
     optionsDiv.style.opacity = 1;
@@ -15,8 +15,8 @@ function loadOptions(event) {
         optionsDiv.style.top = "100%";
     }
 
-    if (left < window.innerWidth / 2) {
-        optionsDiv.style.right = "-100%";
+    if (right < window.innerWidth / 2) {
+        optionsDiv.style.left = "25%";
     } else {
         optionsDiv.style.right = "10%";
     }
