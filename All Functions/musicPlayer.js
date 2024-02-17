@@ -11,12 +11,12 @@ async function playCategory(event) {
     addToRecent(this);
 
     if (this.type === "artist") {
-        playerData = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=1`);
+        playerData = await axios.get(`https://saavn.dev/artists/${this.id}/songs?page=1`);
         totalArtistSongs = playerData.data.data.total;
         currentQueuePage = 1;
         currentArtistId = this.id;
     } else {
-        playerData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
+        playerData = await axios.get(`https://saavn.dev/${this.type}s?id=${this.id}`);
     }
 
     const songsData = playerData.data.data;

@@ -86,10 +86,10 @@ async function loadDetails() {
 
     window.history.replaceState({}, "", url);
 
-    const playerData = await axios.get(`https://saavn.me/${type}s?id=${id}`);
+    const playerData = await axios.get(`https://saavn.dev/${type}s?id=${id}`);
 
     if (type === "artist") {
-        const songs = await axios.get(`https://saavn.me/artists/${id}/songs?page=1`);
+        const songs = await axios.get(`https://saavn.dev/artists/${id}/songs?page=1`);
 
         playerSongs = songs.data.data.results;
         lastpage = songs.data.data.lastpage;
@@ -101,7 +101,7 @@ async function loadDetails() {
         player = playerData.data.data[0];
         const albumid = player.album.id;
 
-        const albumdata = await axios.get(`https://saavn.me/albums?id=${albumid}`);
+        const albumdata = await axios.get(`https://saavn.dev/albums?id=${albumid}`);
 
         playerSongs = albumdata.data.data.songs;
         currentPage = 0;

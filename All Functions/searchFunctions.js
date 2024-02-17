@@ -16,7 +16,7 @@ async function handleInput(event) {
 async function handleSearchkey() {
     searchResultsDiv.innerHTML = "";
 
-    const searchData = await axios.get(`https://saavn.me/search/all?query=${searchkey}`);
+    const searchData = await axios.get(`https://saavn.dev/search/all?query=${searchkey}`);
 
     const searchResults = searchData.data.data;
     const topResult = searchResults.topQuery.results[0];

@@ -88,13 +88,13 @@ function closeForceOptions() {
 async function addCategoryToPlaylist(event) {
     event.stopPropagation();
     if (this.type === "song") {
-        const songData = await axios.get(`https://saavn.me/songs?id=${this.id}`);
+        const songData = await axios.get(`https://saavn.dev/songs?id=${this.id}`);
 
         const song = songData.data.data[0];
 
         addSongToPlaylist.bind(song)(this.index);
     } else if (this.type === "playlist" || this.type === "album") {
-        const songData = await axios.get(`https://saavn.me/${this.type}s?id=${this.id}`);
+        const songData = await axios.get(`https://saavn.dev/${this.type}s?id=${this.id}`);
 
         const songs = songData.data.data.songs;
 

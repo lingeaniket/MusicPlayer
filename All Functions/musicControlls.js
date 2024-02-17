@@ -79,7 +79,7 @@ async function handleNextSong(mode) {
 
     if (isArtist && musicPlayerData.songIndex + 1 === musicPlayerData.songQueue.length && currentQueuePage * 10 < totalArtistSongs) {
         currentQueuePage = currentQueuePage + 1;
-        const playerData = await axios.get(`https://saavn.me/artists/${currentArtistId}/songs?page=${currentQueuePage}`);
+        const playerData = await axios.get(`https://saavn.dev/artists/${currentArtistId}/songs?page=${currentQueuePage}`);
         playerData.data.data.results.forEach((data) => {
             musicPlayerData.songQueue.push(data);
         });

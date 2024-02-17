@@ -106,7 +106,7 @@ async function loadRecommendations(type, player) {
         const div01 = document.createElement("div");
 
         h31.innerText = "Top Albums";
-        const songData = await axios.get(`https://saavn.me/artists/${player.id}/albums?page=1`);
+        const songData = await axios.get(`https://saavn.dev/artists/${player.id}/albums?page=1`);
         const data = songData.data.data.results;
 
         div01.append(h31);

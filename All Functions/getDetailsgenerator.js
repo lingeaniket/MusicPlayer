@@ -1,6 +1,6 @@
 async function loadMoreSongs() {
     currentPage++;
-    const songs = await axios.get(`https://saavn.me/artists/${this.id}/songs?page=${currentPage}`);
+    const songs = await axios.get(`https://saavn.dev/artists/${this.id}/songs?page=${currentPage}`);
     lastpage = songs.data.data.lastpage;
 
     for (let i = 0; i < songs.data.data.results.length; i++) {

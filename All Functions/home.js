@@ -1,6 +1,6 @@
 const loadSongs = async () => {
     mainContainer.innerHTML = "";
-    const list = await axios.get(`https://saavn.me/modules?language=${localLanguages.toString()}`);
+    const list = await axios.get(`https://saavn.dev/modules?language=${localLanguages.toString()}`);
     const homeData = list.data.data;
 
     for (let key in homeData) {
