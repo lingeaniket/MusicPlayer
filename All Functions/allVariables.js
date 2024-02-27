@@ -8,6 +8,7 @@ let currentviewPage = 1;
 let currentQueuePage = 0;
 let totalArtistSongs = 0;
 
+
 let songList = null;
 let timerData = null;
 let searchTimer = null;
