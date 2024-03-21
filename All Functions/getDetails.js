@@ -36,18 +36,25 @@ function loadHeadDetails(player, type, id, details01_1) {
     dot_01.style.fontSize = "5px";
     dot_01.style.verticalAlign = "middle";
 
-    if (type === "song") {
+    if (type === "song" || type == "album") {
         const spn01 = document.createElement("span");
-        spn01.innerText = convertName(`${player.primaryArtists}${player.featuredArtists ? ", " + player.featuredArtists : ""}`);
+        // spn01.innerText = convertName(`${player.primaryArtists}${player.featuredArtists ? ", " + player.featuredArtists : ""}`);
+        spn01.innerText = player.subtitle;
         p06_01.append(spn01);
         p06_01.append(dot_01);
 
         const spn02 = document.createElement("span");
-        spn02.innerText = player.playCount + " plays";
+        if (type === "song") {
+            spn02.innerText = player.play_count?.toLocaleString() + " plays";
+        } else {
+            spn02.innerText = findPlays(player.songs).toLocaleString() + " plays";
+        }
         p06_01.append(spn02);
-    } else if (type === "album") {
-        p06_01.innerHTML = convertName(`${player.primaryArtists} ${convertArtistToString(player.featuredArtists)}`);
-    } else {
+    }
+    // else if (type === "album") {
+    //     p06_01.innerHTML = convertName(`${player.primaryArtists} ${convertArtistToString(player.featuredArtists)}`);
+    // }
+    else {
         const spn01 = document.createElement("span");
         spn01.innerText = `${player.followerCount} followers`;
         p06_01.append(spn01);
@@ -65,9 +72,9 @@ function loadHeadDetails(player, type, id, details01_1) {
     const p06_02 = document.createElement("p");
     p06_02.innerText =
         type === "song"
-            ? `${player.copyright}`
+            ? `${player.copyright_text}`
             : type === "album"
-            ? `${player.songCount} Song${player.songCount > 1 ? "s" : ""}`
+            ? `${player.song_count} Song${player.song_count > 1 ? "s" : ""}`
             : type === "artist"
             ? `${player.dominantLanguage}, ${player.dominantType}`
             : `${player.firstname} ${player.lastname}`;
@@ -83,7 +90,7 @@ function loadHeadDetails(player, type, id, details01_1) {
     const btn07_01 = document.createElement("button");
     btn07_01.innerText = "Play";
 
-    btn07_01.onclick = playCategory.bind({ type, id }); // musicPlayer.js
+    btn07_01.onclick = playCategory.bind({ type, id }); // musicPlayer.js 1
 
     div07_01.append(btn07_01);
     details07.append(div07_01);
@@ -150,7 +157,7 @@ function loadMainDetails(playerSongs, type, id, div1) {
                 newIndex--;
                 continue;
             }
-            loadSongList(details09, playerSongs[i], "", i + newIndex);
+            loadSongList(details09, playerSongs[i], "", i + newIndex); // commonFunctions.js 153
         }
 
         if (!lastpage) {

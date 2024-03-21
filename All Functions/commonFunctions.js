@@ -147,7 +147,7 @@ function convertName(name) {
         "&amp;": "&",
     };
 
-    return name.replace(/%20|%22|%27|%2C|%3F|&quot;|&amp;/g, (match) => sequenceMap[match]);
+    return name ? name.replace(/%20|%22|%27|%2C|%3F|&quot;|&amp;/g, (match) => sequenceMap[match]) : "";
 }
 
 function loadSongList(maindiv, data, type, id) {
@@ -263,3 +263,17 @@ function loadSongList(maindiv, data, type, id) {
 
     maindiv.append(search17);
 }
+
+const findPlays = (songs) => {
+    const plays = songs.reduce((acc, song) => {
+        return acc + Number(song.play_count);
+    }, 0);
+    return plays;
+};
+
+const findDuration = (songs) => {
+    const duration = songs.reduce((acc, song) => {
+        return acc + Number(song.duration);
+    }, 0);
+    return duration;
+};

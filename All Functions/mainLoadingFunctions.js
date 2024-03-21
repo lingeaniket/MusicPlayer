@@ -86,28 +86,28 @@ async function loadDetails() {
 
     window.history.replaceState({}, "", url);
 
-    const playerData = await axios.get(`https://saavn.dev/${type}s?id=${id}`);
+    const playerData = await axios.get(`https://jio-saavn-api.onrender.com/${type}?id=${id}`);
+    const modules = playerData.data.data.modules;
+    console.log(playerData.data.data.modules);
 
     if (type === "artist") {
-        const songs = await axios.get(`https://saavn.dev/artists/${id}/songs?page=1`);
+        const songs = await axios.get(`https://jio-saavn-api.onrender.com/artist/${id}/songs?page=1`);
 
         playerSongs = songs.data.data.results;
         lastpage = songs.data.data.lastpage;
         totalSongs = songs.data.data.total;
         currentPage = 1;
         player = playerData.data.data;
-
     } else if (type === "song") {
-        player = playerData.data.data[0];
-        const albumid = player.album.id;
+        player = playerData.data.data.songs[0];
+        const albumid = player.album_id;
 
-        const albumdata = await axios.get(`https://saavn.dev/albums?id=${albumid}`);
+        const albumdata = await axios.get(`https://jio-saavn-api.onrender.com/album?id=${albumid}`);
 
         playerSongs = albumdata.data.data.songs;
         currentPage = 0;
         lastpage = true;
         totalSongs = 0;
-        
     } else {
         player = playerData.data.data;
         playerSongs = player.songs;
@@ -121,11 +121,11 @@ async function loadDetails() {
 
     const details01_1 = document.createElement("div");
 
-    loadHeadDetails(player, type, id, details01_1);
+    loadHeadDetails(player, type, id, details01_1); // getDetails.js 1
 
     const div1 = document.createElement("div");
 
-    loadMainDetails(playerSongs, type, id, div1);
+    loadMainDetails(playerSongs, type, id, div1); // getDetails.js 128
 
     details01_1.append(div1);
 
@@ -143,5 +143,5 @@ async function loadDetails() {
     details01.append(details01_1);
     mainContainer.append(details01);
 
-    loadRecommendations(type, player);
+    loadRecommendations(type, modules); // getRecoComponents.js 01
 }

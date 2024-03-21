@@ -7,16 +7,16 @@ async function playCategory(event) {
     totalArtistSongs = 0;
     musicPlayerData.songIndex = 0;
 
-    closeForceOptions();
-    addToRecent(this);
+    closeForceOptions(); // commonFunction.js 76
+    addToRecent(this); // same file 105  recently played songs (history)
 
     if (this.type === "artist") {
-        playerData = await axios.get(`https://saavn.dev/artists/${this.id}/songs?page=1`);
+        playerData = await axios.get(`https://jio-saavn-api.onrender.com/${this.id}/songs?page=1`);
         totalArtistSongs = playerData.data.data.total;
         currentQueuePage = 1;
         currentArtistId = this.id;
     } else {
-        playerData = await axios.get(`https://saavn.dev/${this.type}s?id=${this.id}`);
+        playerData = await axios.get(`https://jio-saavn-api.onrender.com/${this.type}?id=${this.id}`);
     }
 
     const songsData = playerData.data.data;

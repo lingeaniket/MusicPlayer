@@ -14,7 +14,7 @@ function updatePlaylist() {
     playlist.innerHTML = "";
     for (let i = 0; i < myPlaylistData.data.length; i++) {
         const list = myPlaylistData.data[i];
-        createPlaylistItem(playlist, list);
+        createPlaylistItem(playlist, list); // same file
     }
 }
 
@@ -31,7 +31,7 @@ function handleOpenPlaylist(event) {
 function createPlaylistItem(parent, data) {
     const play02 = document.createElement("div");
     play02.className = "playlist02";
-    play02.onclick = handleMyPlaylistRoute.bind(data);
+    play02.onclick = handleMyPlaylistRoute.bind(data); // routes.js
 
     const play03 = document.createElement("div");
     play03.className = "playlist03";

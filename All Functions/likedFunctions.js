@@ -1,5 +1,3 @@
-
-
 async function loadLiked(mode) {
     mainContainer.innerHTML = "";
 

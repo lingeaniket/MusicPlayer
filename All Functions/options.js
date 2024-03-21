@@ -42,7 +42,7 @@ function backToPlaylist(event) {
         const i1 = document.createElement("i");
         i1.className = "fa-solid fa-chevron-right fa-lg";
         div4.appendChild(i1);
-        div4.onclick = handleAddToPlaylist.bind(this);
+        div4.onclick = handleAddToPlaylist.bind(this); // same file 50
         parentNode.append(div4);
     }, 10);
 }

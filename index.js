@@ -1,5 +1,5 @@
 window.onload = () => {
-    updateContent();
+    updateContent(); //same file
 };
 
 function closeOptions(event) {
@@ -36,33 +36,33 @@ window.addEventListener("click", closeOptions);
 function updateContent() {
     const content = document.getElementById("main-container");
     content.innerHTML = "";
-    loadPlaylist();
-    loadLanguages();
+    loadPlaylist(); // same file
+    loadLanguages(); // same file
 
     if (window.location.pathname.includes("/search")) {
-        loadSearch();
+        loadSearch(); // mainLoadingFunction.js 1
     } else if (window.location.pathname.includes("/get-details")) {
-        loadDetails();
+        loadDetails(); // mainLoadingFunction.js 74
     } else if (window.location.pathname.includes("/liked")) {
-        loadLiked("liked");
+        loadLiked("liked"); // likedFunctions.js 1
     } else if (window.location.pathname.includes("/history")) {
-        loadLiked("history");
+        loadLiked("history"); // likedFunctions.js 1
     } else if (window.location.pathname.includes("/my-playlist")) {
-        loadMyPlaylist();
+        loadMyPlaylist(); // playlist.js 1
     } else {
-        loadSongs();
+        loadSongs(); // home.js 1
     }
 }
 
 function loadPlaylist() {
-    updatePlaylist();
+    updatePlaylist(); // playlistAcess.js
 }
 
 function loadLanguages() {
     const formId = document.getElementById("languageForm");
     formId.innerHTML = "";
 
-    formId.onsubmit = handlelanguages;
+    formId.onsubmit = handlelanguages; // same file
     const langDiv = document.getElementById("selectedLanguages");
     langDiv.innerText = localLanguages.toString().replaceAll(",", ", ");
 
@@ -111,8 +111,8 @@ function handlelanguages(event) {
 
     localStorage.setItem("local-languages", JSON.stringify(checkedValues));
 
-    loadLanguages();
-    handleToggleLang(event);
+    loadLanguages(); // same file
+    handleToggleLang(event); // same file
 
     if (window.location.pathname === "/" || window.location.pathname === "") {
         loadSongs();
@@ -136,5 +136,5 @@ function handleToggleLang(event) {
 }
 
 window.addEventListener("popstate", function () {
-    updateContent();
+    updateContent(); // same file
 });

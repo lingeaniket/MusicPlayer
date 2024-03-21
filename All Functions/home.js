@@ -1,14 +1,24 @@
 const loadSongs = async () => {
     mainContainer.innerHTML = "";
-    const list = await axios.get(`https://saavn.dev/modules?language=${localLanguages.toString()}`);
+    const list = await axios.get(`https://jio-saavn-api.onrender.com/modules?lang=${localLanguages.toString()}`);
     const homeData = list.data.data;
+    // to filter out radio and other unnecessory item from lists and sort them with given position
+    const pairs = Object.entries(homeData).map(([key, value]) => ({
+        key,
+        position: value.position,
+    }));
+    pairs.sort((a, b) => a.position - b.position);
+    const sortedKeys = pairs.map((pair) => pair.key);
+    const sortedArray = sortedKeys
+        .map((key) => homeData[key])
+        .filter((item) => item.title && ["album", "playlist", "chart", "song"].includes(item.data[0].type));
 
-    for (let key in homeData) {
+    for (let key in sortedArray) {
         const catMainTitle = document.createElement("div");
         catMainTitle.classList.add("cat-main-title");
 
         const h2Title = document.createElement("h2");
-        h2Title.innerText = `top ${key}`;
+        h2Title.innerText = sortedArray[key].title;
 
         catMainTitle.append(h2Title);
         mainContainer.append(catMainTitle);
@@ -16,20 +26,16 @@ const loadSongs = async () => {
         const cat01 = document.createElement("div");
         cat01.classList.add("cat-01");
 
-        if (Array.isArray(homeData[key])) {
-            createListItems(homeData[key], cat01);
-        } else {
-            const inData = homeData[key];
-            for (let innerKey in inData) {
-                createListItems(inData[innerKey], cat01);
-            }
-        }
+        createListItems(sortedArray[key].data, cat01); // same file 35
 
         mainContainer.append(cat01);
     }
 };
 
-function createListItems(data, cat01, type) {
+function createListItems(inputdata, cat01, type) {
+    // square list items
+    const data = inputdata.filter((item) => ["album", "playlist", "chart", "song"].includes(item.type));
+
     for (let i = 0; i < data.length; i++) {
         let list = {};
         if (type === "song-yml") {
@@ -63,7 +69,7 @@ function createListItems(data, cat01, type) {
         const listBtns = document.createElement("div");
         listBtns.className = "listBtns";
 
-        addEventListenerList(listBtns, list);
+        addEventListenerList(listBtns, list); // add event listeners same file 174
 
         const listHov = document.createElement("div");
         listHov.className = "listhov save-library";
@@ -76,7 +82,7 @@ function createListItems(data, cat01, type) {
 
         const listplaybtn = document.createElement("div");
         listplaybtn.className = "listplaybtn";
-        listplaybtn.onclick = playCategory.bind(list);
+        listplaybtn.onclick = playCategory.bind(list); // musicPlayer.js 01
 
         listabs2.append(listplaybtn);
         listabs.append(listabs2);
