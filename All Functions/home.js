@@ -137,31 +137,17 @@ function createListItems(inputdata, cat01, type) {
         listTitle.classList.add("list-title");
 
         const titleh4 = document.createElement("h4");
-        titleh4.innerText = convertName(list.name ? list.name : list.title);
+        titleh4.innerText = convertName(list.name ? list.name : list.title); // to convert the name to remove any unwanted characters 
 
         listTitle.append(titleh4);
 
         const titleP = document.createElement("p");
         titleP.innerText = convertName(
-            type === "topTrend"
+            type === "topTrend" // if it is from top trending i.e. from search page //if (type === "topTrend")
                 ? list.subtitle
-                : type === "search"
+                : type === "search" // if not then check from search result // else if(type === "search")
                 ? list.description
-                : list.type === "album"
-                ? list.artists
-                    ? Array.isArray(list.artists)
-                        ? convertArtistToString(list.artists)
-                        : list.artists
-                    : list.subtitle
-                : list.type === "song"
-                ? list.primaryArtists
-                    ? Array.isArray(list.primaryArtists)
-                        ? convertArtistToString(list.primaryArtists)
-                        : list.primaryArtists
-                    : list.subtitle
-                : list.type !== "artist"
-                ? list.subtitle
-                : ""
+                : list.subtitle
         );
 
         listTitle.append(titleP);

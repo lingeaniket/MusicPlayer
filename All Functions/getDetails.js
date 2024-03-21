@@ -56,11 +56,11 @@ function loadHeadDetails(player, type, id, details01_1) {
     // }
     else {
         const spn01 = document.createElement("span");
-        spn01.innerText = `${player.followerCount} followers`;
+        spn01.innerText = `${player.follower_count} followers`;
         p06_01.append(spn01);
         p06_01.append(dot_01);
         const spn02 = document.createElement("span");
-        spn02.innerText = `${player.fanCount} fans`;
+        spn02.innerText = `${player.fan_count} fans`;
         p06_01.append(spn02);
     }
 
@@ -76,7 +76,7 @@ function loadHeadDetails(player, type, id, details01_1) {
             : type === "album"
             ? `${player.song_count} Song${player.song_count > 1 ? "s" : ""}`
             : type === "artist"
-            ? `${player.dominantLanguage}, ${player.dominantType}`
+            ? `${player.dominant_language}, ${player.dominant_type}`
             : `${player.firstname} ${player.lastname}`;
 
     div06_02.append(p06_02);

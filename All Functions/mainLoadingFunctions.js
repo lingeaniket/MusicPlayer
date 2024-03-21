@@ -88,14 +88,14 @@ async function loadDetails() {
 
     const playerData = await axios.get(`https://jio-saavn-api.onrender.com/${type}?id=${id}`);
     const modules = playerData.data.data.modules;
-    console.log(playerData.data.data.modules);
+    // console.log(playerData.data.data.modules);
 
     if (type === "artist") {
-        const songs = await axios.get(`https://jio-saavn-api.onrender.com/artist/${id}/songs?page=1`);
+        const songs = await axios.get(`https://jio-saavn-api.onrender.com/artist/songs?id=${id}&page=1`);
 
-        playerSongs = songs.data.data.results;
-        lastpage = songs.data.data.lastpage;
-        totalSongs = songs.data.data.total;
+        playerSongs = songs.data.data.top_songs.songs;
+        lastpage = songs.data.data.top_songs.last_page;
+        totalSongs = songs.data.data.top_songs.total;
         currentPage = 1;
         player = playerData.data.data;
     } else if (type === "song") {
