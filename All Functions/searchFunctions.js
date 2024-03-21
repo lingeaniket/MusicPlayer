@@ -1,4 +1,3 @@
-
 async function handleInput(event) {
     searchkey = event.target.value;
     if (searchTimer) {
@@ -16,7 +15,7 @@ async function handleInput(event) {
 async function handleSearchkey() {
     searchResultsDiv.innerHTML = "";
 
-    const searchData = await axios.get(`https://saavn.dev/search/all?query=${searchkey}`);
+    const searchData = await axios.get(`https://saavn.dev/api/search?query=${searchkey}`);
 
     const searchResults = searchData.data.data;
     const topResult = searchResults.topQuery.results[0];
@@ -39,7 +38,7 @@ async function handleSearchkey() {
     search11.className = "search11";
 
     const search11_img = document.createElement("img");
-    search11_img.src = topResult.image[2].link;
+    search11_img.src = topResult.image[2].url;
 
     search11.append(search11_img);
     search10.append(search11);
@@ -76,7 +75,7 @@ async function handleSearchkey() {
     const search09_01 = document.createElement("div");
     search09_01.className = "search09";
 
-    loadSearchSongs(search09_01, songsData);
+    loadSearchSongs(search09_01, songsData); // same file 110
 
     searchResultsDiv.append(search09_01);
 
@@ -89,7 +88,7 @@ async function loadTopTrends() {
     const search08 = document.getElementById("search-results-div");
     search08.innerHTML = "";
 
-    const topTrendData = await axios.get("https://music-streaming-api.onrender.com/api/v1/music/get-topSearch");
+    const topTrendData = await axios.get("https://jio-saavn-api.onrender.com/search/top");
 
     const topTrend = document.createElement("div");
 
@@ -103,7 +102,7 @@ async function loadTopTrends() {
     const cat01 = document.createElement("div");
     cat01.className = "cat-01";
 
-    createListItems(topTrendData.data, cat01, "topTrend");
+    createListItems(topTrendData.data.data, cat01, "topTrend");
 
     search08.append(cat01);
 }
@@ -119,11 +118,11 @@ function loadSearchSongs(maindiv, data) {
 
     const div14 = document.createElement("div");
 
-    const search15 = document.createElement("div");
-    search15.className = "search15";
-    search15.innerText = "View all";
+    // const search15 = document.createElement("div");
+    // search15.className = "search15";
+    // search15.innerText = "View all";
 
-    div14.append(search15);
+    // div14.append(search15);
     search14.append(div14);
     maindiv.append(search14);
 

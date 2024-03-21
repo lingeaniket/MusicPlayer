@@ -9,7 +9,7 @@ body {
     font-family: Lato, sans-serif;
     outline: none;
     touch-action: manipulation;
-      
+
     /* Disable tap highlight effect */
     -webkit-tap-highlight-color: transparent;
 }
@@ -120,7 +120,12 @@ a {
     display: flex;
     flex-wrap: wrap;
     margin: 0 0 0 -22px;
+    /* overflow: auto; */
     /* width: 100%; */
+}
+
+.cat-01::-webkit-scrollbar {
+    display: none;
 }
 
 .listmain {
@@ -165,6 +170,7 @@ a {
 
 .listmain {
     position: relative;
+    flex-shrink: 0;
 }
 
 .listImage {
@@ -463,7 +469,6 @@ a {
     color: white;
 }
 
-
-img{
+img {
     pointer-events: none;
 }

@@ -20,14 +20,17 @@ async function playCategory(event) {
     }
 
     const songsData = playerData.data.data;
+    console.log(songsData);
 
     if (this.type === "artist") {
         musicPlayerData.currentSong = songsData.results[0];
         musicPlayerData.songQueue = songsData.results;
-    } else if (this.type === "song") {
-        musicPlayerData.currentSong = songsData[0];
-        musicPlayerData.songQueue = songsData;
-    } else {
+    }
+    // else if (this.type === "song") {
+    //     musicPlayerData.currentSong = songsData.songs[0];
+    //     musicPlayerData.songQueue = songsData.songs;
+    // }
+    else {
         musicPlayerData.currentSong = songsData.songs[0];
         musicPlayerData.songQueue = songsData.songs;
     }
@@ -43,7 +46,7 @@ async function playCategory(event) {
 async function playMusicPlayer() {
     musicPlayerData.currentSongDetails = musicPlayerData.currentSong;
 
-    musicPlayer.src = musicPlayerData.currentSongDetails.downloadUrl[4].link;
+    musicPlayer.src = musicPlayerData.currentSongDetails.download_url[4].link;
 
     musicPlayer.onloadedmetadata = function () {
         slider1.max = musicPlayer.duration;
@@ -53,7 +56,7 @@ async function playMusicPlayer() {
     };
 
     mainMusicPlayer.classList.remove("not-playing");
-    updateCurrentSongDetails();
+    updateCurrentSongDetails(); // same file 73
     musicPlayer.play();
     timerData = setInterval(() => {
         slider1.value = musicPlayer.currentTime;
@@ -76,7 +79,7 @@ function updateCurrentSongDetails() {
     const player02 = document.createElement("div");
     player02.classList.add("player-02");
 
-    player02.onclick = handleImageQueue;
+    player02.onclick = handleImageQueue; // queue.js 115
 
     const img01 = document.createElement("img");
     img01.src = musicPlayerData.currentSongDetails.image[2].link;
@@ -94,17 +97,18 @@ function updateCurrentSongDetails() {
     player03.append(h3player);
 
     const pPlayer = document.createElement("p");
-    pPlayer.innerText = convertName(
-        musicPlayerData.currentSongDetails.primaryArtists + ", " + musicPlayerData.currentSongDetails.featuredArtists
-    );
+    // pPlayer.innerText = convertName(
+    //     musicPlayerData.currentSongDetails.primaryArtists + ", " + musicPlayerData.currentSongDetails.featuredArtists
+    // );
+    pPlayer.innerText = musicPlayerData.currentSongDetails.subtitle;
 
     player03.append(pPlayer);
     player.append(player03);
 }
 
 async function addToRecent(data) {
-    const { type, id, image, primaryArtists, artists, name, title, subtitle } = data;
-    const obj = { type, id, image, primaryArtists, artists, name, title, subtitle };
+    const { type, id, image, name, title, subtitle } = data;
+    const obj = { type, id, image, name, title, subtitle };
 
     let elIndex = null;
 

@@ -87,29 +87,31 @@ function closeForceOptions() {
 
 async function addCategoryToPlaylist(event) {
     event.stopPropagation();
-    if (this.type === "song") {
-        const songData = await axios.get(`https://saavn.dev/songs?id=${this.id}`);
+    // if (this.type === "song") {
+    //     const songData = await axios.get(`https://saavn.dev/songs?id=${this.id}`);
 
-        const song = songData.data.data[0];
+    //     const song = songData.data.data.songs[0];
 
-        addSongToPlaylist.bind(song)(this.index);
-    } else if (this.type === "playlist" || this.type === "album") {
-        const songData = await axios.get(`https://saavn.dev/${this.type}s?id=${this.id}`);
+    //     addSongToPlaylist.bind(song)(this.index);
+    // }
+    // else
+    // if (this.type === "playlist" || this.type === "album") {
+    const songData = await axios.get(`https://jio-saavn-api.onrender.com/${this.type}?id=${this.id}`);
 
-        const songs = songData.data.data.songs;
+    const songs = songData.data.data.songs;
 
-        for (let i = 0; i < songs.length; i++) {
-            addSongToPlaylist.bind(songs[i])(this.index);
-        }
+    for (let i = 0; i < songs.length; i++) {
+        addSongToPlaylist.bind(songs[i])(this.index);
     }
+    // }
     closeForceOptions();
     localStorage.setItem("my-playlist-data", JSON.stringify(myPlaylistData));
     updatePlaylist(); // playlistAccess.js
 }
 
 function addSongToPlaylist(index) {
-    const { id, image, primaryArtists, artists, name, title, subtitle } = this;
-    const obj = { type: "song", id, image, primaryArtists, artists, name, title, subtitle };
+    const { id, image, name, title, subtitle, duration } = this;
+    const obj = { type: "song", id, image, name, title, subtitle, duration };
 
     myPlaylistData.data[index].songs.push(obj);
 }
@@ -178,7 +180,7 @@ function loadSongList(maindiv, data, type, id) {
     searchmain_01.className = "search27";
 
     const search18_img = document.createElement("img");
-    search18_img.src = data.image[2].link.replace("http:", "https:");
+    search18_img.src = data.image[2].link ? data.image[2].link.replace("http:", "https:") : data.image[2].url.replace("http:", "https:");
 
     searchmain_01.append(search18_img);
 

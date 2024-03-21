@@ -35,7 +35,7 @@ async function loadSearch() {
     searchInput.classList.add("search-input");
     searchInput.type = "text";
     searchInput.placeholder = "What do you want to listen to?";
-    searchInput.oninput = handleInput;
+    searchInput.oninput = handleInput; // searchFunctions.js 1
 
     search05.append(searchInput);
 
@@ -68,7 +68,7 @@ async function loadSearch() {
     search01.append(search07);
     mainContainer.append(search01);
 
-    await loadTopTrends();
+    await loadTopTrends(); // searchFunctions.js 88
 }
 
 async function loadDetails() {

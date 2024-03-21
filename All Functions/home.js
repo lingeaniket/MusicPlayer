@@ -34,7 +34,7 @@ const loadSongs = async () => {
 
 function createListItems(inputdata, cat01, type) {
     // square list items
-    const data = inputdata.filter((item) => ["album", "playlist", "chart", "song"].includes(item.type));
+    const data = inputdata.filter((item) => ["album", "playlist", "chart", "song", "artist"].includes(item.type));
 
     for (let i = 0; i < data.length; i++) {
         let list = {};
@@ -57,10 +57,11 @@ function createListItems(inputdata, cat01, type) {
         listImage.classList.add("listImage");
         if (list.type === "artist") {
             listImage.style.borderRadius = "50%";
+            listImage.style.position = "relative";
         }
 
         const listimg = document.createElement("img");
-        listimg.src = Array.isArray(list.image) ? list.image[2].link : list.image;
+        listimg.src = Array.isArray(list.image) ? (list.image[2].link ? list.image[2].link : list.image[2].url) : list.image;
         listImage.append(listimg);
 
         imgdiv.append(listImage);
